@@ -1,0 +1,35 @@
+.Formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 400px;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #1b1b1b; /* Fondo blanco para el formulario */
+    color: #ffffff; /* Texto negro */
+}
+
+.Formulario h1 {
+    font-size: 3em; /* Tamaño de fuente más grande para el título */
+}
+
+.Formulario input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.Formulario button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff; /* Color de botón azul */
+    color: #fff;
+    cursor: pointer;
+}
+
+.Formulario button:hover {
+    background-color: #0056b3; /* Color de botón azul al pasar el cursor */
+}

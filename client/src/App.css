@@ -1,0 +1,7 @@
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000; /* Opcional: para darle un color de fondo */
+  }
