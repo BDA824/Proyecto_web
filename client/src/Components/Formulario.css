@@ -5,31 +5,50 @@
     align-items: center;
     gap: 1rem;
     width: 400px;
-    padding: 16px;
+    padding: 20px;
     border-radius: 10px;
-    background-color: #1b1b1b; /* Fondo blanco para el formulario */
-    color: #ffffff; /* Texto negro */
+    background-color: #282828; /* Fondo oscuro, pero no tan oscuro como el negro puro */
+    color: #ffffff; /* Texto blanco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .Formulario h1 {
     font-size: 3em; /* Tamaño de fuente más grande para el título */
+    margin-bottom: 1em;
+    font-family: 'Times New Roman', sans-serif; /* Fuente más profesional para títulos */
 }
 
 .Formulario input {
     padding: 10px;
     border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #ccc;
+    background-color: #282828; /* Fondo oscuro, pero no tan oscuro como el negro puro */
+    color: #ffffff; /* Texto blanco */
+    width: 90%; /* Asegura que el campo de entrada ocupe todo el ancho disponible */
+    gap: 10px;
 }
 
 .Formulario button {
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #007bff; /* Color de botón azul */
+    background-color: #0F5959; /* Color azul */
     color: #fff;
     cursor: pointer;
+    width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+    margin-top: 1rem;
 }
 
 .Formulario button:hover {
-    background-color: #0056b3; /* Color de botón azul al pasar el cursor */
+    background-color: #1D7373; /* Color azul al pasar el cursor */
+}
+
+.link-registro {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #107361; /* Color verde */
+    margin-top: 1em;
 }

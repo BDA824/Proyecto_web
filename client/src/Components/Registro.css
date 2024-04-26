@@ -6,7 +6,7 @@
     gap: 1rem;
     width: 400px;
     border-radius: 5px;
-    background-color: #1b1b1b;
+    background-color: #282828;
     color: #ffffff;
 }
 
@@ -15,6 +15,10 @@
 }
 
 .Registro input {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -34,5 +38,6 @@
 }
 
 .Formulario {
-    padding: 0%;
+    padding: 0;
+    margin: 0;
 }

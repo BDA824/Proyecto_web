@@ -14,19 +14,20 @@ export function Formulario({changeView}){
 
         if(nombre === "" || contraseña === ""){
             setError(true)
-            return
+            return;
         }
 
         setError(false)
 
         setUser([nombre])
+
     }
 
     return(
         <section className="Formulario">
             <h1>Login</h1>
 
-            <form className="formulario" onSubmit={handleSubmit}>
+            <form className="Formulario" onSubmit={handleSubmit}>
                 <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre de usuario"/>
                 <input type="password" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Ingrese su contraseña"/>
                 <button>Iniciar Sesion</button>
