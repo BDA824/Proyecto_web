@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; 
 import { useNavigate } from "react-router-dom";
+import {useForm} from "react-hook-form"
 import "./Registro.css";
 
 export function Registro({ changeView }) {
@@ -16,6 +17,10 @@ export function Registro({ changeView }) {
     const [errorContraseñasNoCoinciden, setErrorContraseñasNoCoinciden] = useState(false);
 
     const navigate = useNavigate();
+    // const {register, handleSubmit} = useForm()
+    // const onSubmit = handleSubmit(data => {
+    //     console.log(data)
+    // })
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,12 +58,18 @@ export function Registro({ changeView }) {
         }        
     };
 
+
     return (
-        <section className="Registro">
+        <section className="Registro" >
             <h1>Registro</h1>
             <form className="Formulario" onSubmit={handleSubmit}>
-                <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Ingrese un nombre" />
+                <input 
+                type="text" 
+                value={nombre} 
+                onChange={e => setNombre(e.target.value)} 
+                placeholder="Ingrese un nombre" />
                 {errorNombre && <p>El nombre es obligatorio.</p>}
+                {/* {...register("name", {required : true})} */}
                 <input type="text" value={pais} onChange={e => setPais(e.target.value)} placeholder="Ingrese su país" />
                 {errorPais && <p>El país es obligatorio.</p>}
                 <input type="email" value={gmail} onChange={e => setGmail(e.target.value)} placeholder="Ingrese su correo electrónico" />
