@@ -5,16 +5,16 @@
     align-items: center;
     gap: 1rem;
     width: 400px;
-    padding: 20px; /* Añade un poco de padding para mejorar el espaciado interno */
-    border-radius: 20px; /* Redondea más los bordes para un aspecto más moderno */
+    padding: 20px;
+    border-radius: 20px;
     background-color: #282828;
     color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega sombra para dar profundidad */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .Registro h1 {
-    font-size: 2.5em; /* Reduce el tamaño del título para un equilibrio visual */
-    margin-bottom: 1rem; /* Añade margen inferior al título para separarlo de los campos de entrada */
+    font-size: 2.5em;
+    margin-bottom: 1rem;
 }
 
 .Registro input {
@@ -23,9 +23,9 @@
     border: 1px solid #ccc;
     background-color: #282828;
     color: #ffffff;
-    width: 100%; /* Ajusta el ancho al 100% para llenar el contenedor */
-    margin-bottom: 1rem; /* Mantiene el espacio entre los campos de entrada */
-    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+    width: 100%;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
 }
 
 .Registro button {
@@ -35,8 +35,8 @@
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
-    width: 100%; /* Ajusta el ancho al 100% para llenar el contenedor */
-    margin-top: 1rem; /* Añade margen superior al botón para separarlo de los campos de entrada */
+    width: 100%; 
+    margin-top: 1rem;
 }
 
 .Registro button:hover {

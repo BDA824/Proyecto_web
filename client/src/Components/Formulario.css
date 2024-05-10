@@ -44,7 +44,7 @@ body {
     padding: 10px;
     border-radius: 20px;
     border: none;
-    background-color: #0F5959;
+    background-color: #007bff;
     color: #fff;
     cursor: pointer;
     width: 95%;
@@ -53,12 +53,13 @@ body {
 }
 
 .Formulario button:hover {
-    background-color: #1D7373;
+    background-color: #0056b3;
 }
 
 .link-registro {
     text-decoration: underline;
     cursor: pointer;
     color: #107361;
-    margin-top: 1em;
+
+    margin-bottom: 10px;
 }

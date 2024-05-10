@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Formulario.css';
 
 export default function Formulario() {
     const [nombre, setNombre] = useState("");
     const [contraseña, setContraseña] = useState("");
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,6 +16,8 @@ export default function Formulario() {
         }
         setError(false);
         // Aquí iría la lógica para enviar los datos al servidor
+        // Después de enviar los datos, redirige al usuario a la página de productos
+        navigate('/productos');
     };
 
     return (
@@ -26,7 +29,7 @@ export default function Formulario() {
                 {error && <p>Por favor, completa todos los campos.</p>}
                 <button type="submit" className="Formulario__button">Iniciar Sesión</button>
             </form>
-            <Link to="/create-account" className="link-registro">¿No tienes cuenta?</Link>
+            <Link to="/create-account" className="link-registro"> ¿No tienes cuenta?</Link>
         </section>
     );
 }
