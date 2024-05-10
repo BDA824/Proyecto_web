@@ -1,16 +1,17 @@
 from django.urls import path, include
 from rest_framework import routers
-from broker import views
+from .views import UserView, ActionView, BuyView, CountryView, ManagerView, BrokerView, CurrencyView
 
 router = routers.DefaultRouter()
-router.register(r"users", views.UserView, basename="users")
-router.register(r"actions", views.ActionView, basename="actions")
-router.register(r"buys", views.BuyView, basename="buys")
-router.register(r"countrys", views.CountryView, basename="countrys")
-router.register(r"managers", views.ManagerView, basename="managers")
-router.register(r"brokers", views.BrokerView, basename="brokers")
-router.register(r"currencys", views.CurrencyView, basename="currencys")
+router.register(r"users", UserView, "users")
+router.register(r"actions", ActionView, "actions")
+router.register(r"buys", BuyView, "buys")
+router.register(r"countries", CountryView, "countries")
+router.register(r"managers", ManagerView, "managers")
+router.register(r"brokers", BrokerView, "bokers")
+router.register(r"currencys", CurrencyView, "currencys")
+
 
 urlpatterns = [
-    path("api/v1/", include(router.urls))
+    path("api/v1/", include(router.urls)),
 ]
