@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import { createUser } from "../api/broker.api";
 import './Registro.css';
+import {toast} from 'react-hot-toast'
 
 export default function Registro() {
     const [nombre, setNombre] = useState("");
@@ -17,6 +18,7 @@ export default function Registro() {
 
     const onSubmit = handleSubmit(async (data) => {
         await createUser(data);
+        toast.success("Registro exitoso")
         navigate("/login")
 
     })
