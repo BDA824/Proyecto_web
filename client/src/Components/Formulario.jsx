@@ -1,42 +1,32 @@
-export default Formulario;
-import "./Formulario.css"
-import { useState } from "react"
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import './Formulario.css';
 
-export function Formulario({changeView}){
-    const [nombre, setNombre] = useState("")
-    const [contraseña, setContraseña] = useState("")
-    const [error, setError] = useState(false)
+export default function Formulario() {
+    const [nombre, setNombre] = useState("");
+    const [contraseña, setContraseña] = useState("");
+    const [error, setError] = useState(false);
 
-
-    const handleSubmit = (e) =>{
-        e.preventDefault()
-
-        if(nombre === "" || contraseña === ""){
-            setError(true)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (nombre === "" || contraseña === "") {
+            setError(true);
             return;
         }
+        setError(false);
+        // Aquí iría la lógica para enviar los datos al servidor
+    };
 
-        setError(false)
-
-        setUser([nombre])
-
-    }
-
-    return(
+    return (
         <section className="Formulario">
-            <h1>Login</h1>
-
-            <form className="Formulario" onSubmit={handleSubmit}>
-                <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre de usuario"/>
-                <input type="password" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Ingrese su contraseña"/>
-                <button>Iniciar Sesion</button>
+            <h1 className="Formulario__titulo">Login</h1>
+            <form onSubmit={handleSubmit} className="Formulario__form">
+                <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre de usuario" required className="Formulario__input" />
+                <input type="password" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Contraseña" required className="Formulario__input" />
+                {error && <p>Por favor, completa todos los campos.</p>}
+                <button type="submit" className="Formulario__button">Iniciar Sesión</button>
             </form>
-            {error && <p>Todos los campos son obligatorios</p> }
-            <span>Si no estás registrado, 
-                <span className="link-registro">
-                    <Link to="/create-account">Registrate</Link>
-                </span></span>
+            <Link to="/create-account" className="link-registro">¿No tienes cuenta?</Link>
         </section>
-    )
+    );
 }

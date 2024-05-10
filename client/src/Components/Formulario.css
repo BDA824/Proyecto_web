@@ -1,3 +1,11 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0 auto;
+}
+
 .Formulario {
     display: flex;
     flex-direction: column;
@@ -7,48 +15,50 @@
     width: 400px;
     padding: 20px;
     border-radius: 10px;
-    background-color: #282828; /* Fondo oscuro, pero no tan oscuro como el negro puro */
-    color: #ffffff; /* Texto blanco */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #282828;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
 }
 
+
+
 .Formulario h1 {
-    font-size: 3em; /* Tamaño de fuente más grande para el título */
+    font-size: 3em;
     margin-bottom: 1em;
-    font-family: 'Times New Roman', sans-serif; /* Fuente más profesional para títulos */
+    font-family: 'Times New Roman', sans-serif;
 }
 
 .Formulario input {
     padding: 10px;
-    border-radius: 10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    border-radius: 20px;
     border: 1px solid #ccc;
-    background-color: #282828; /* Fondo oscuro, pero no tan oscuro como el negro puro */
-    color: #ffffff; /* Texto blanco */
-    width: 90%; /* Asegura que el campo de entrada ocupe todo el ancho disponible */
-    gap: 10px;
+    background-color: #282828;
+    color: #ffffff;
+    width: 90%;
+    margin-bottom: 1rem;
+    margin-left: 10px;
 }
 
 .Formulario button {
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 20px;
     border: none;
-    background-color: #0F5959; /* Color azul */
+    background-color: #0F5959;
     color: #fff;
     cursor: pointer;
-    width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
-    margin-top: 1rem;
+    width: 95%;
+    margin-top: 2rem;
+    margin-left: 10px;
 }
 
 .Formulario button:hover {
-    background-color: #1D7373; /* Color azul al pasar el cursor */
+    background-color: #1D7373;
 }
 
 .link-registro {
     text-decoration: underline;
     cursor: pointer;
-    color: #107361; /* Color verde */
+    color: #107361;
     margin-top: 1em;
 }

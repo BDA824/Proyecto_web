@@ -1,85 +1,41 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; 
-import { useNavigate } from "react-router-dom";
-import {useForm} from "react-hook-form"
-import "./Registro.css";
+import { useNavigate, Link } from 'react-router-dom';
+import './Registro.css';
 
-export function Registro({ changeView }) {
+export default function Registro() {
     const [nombre, setNombre] = useState("");
+    const [correo, setCorreo] = useState("");
     const [pais, setPais] = useState("");
-    const [gmail, setGmail] = useState("");
     const [contraseña, setContraseña] = useState("");
     const [confirmarContraseña, setConfirmarContraseña] = useState("");
-    const [errorNombre, setErrorNombre] = useState(false);
-    const [errorPais, setErrorPais] = useState(false);
-    const [errorGmail, setErrorGmail] = useState(false);
-    const [errorContraseña, setErrorContraseña] = useState(false);
-    const [errorContraseñasNoCoinciden, setErrorContraseñasNoCoinciden] = useState(false);
-
-    const navigate = useNavigate();
-    // const {register, handleSubmit} = useForm()
-    // const onSubmit = handleSubmit(data => {
-    //     console.log(data)
-    // })
+    const [error, setError] = useState(false);
+    const navigate = useNavigate(); // Usa useNavigate para la navegación
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        setErrorNombre(false);
-        setErrorPais(false);
-        setErrorGmail(false);
-        setErrorContraseña(false);
-        setErrorContraseñasNoCoinciden(false);
-
-        let hasError = false;
-        if (nombre === "") {
-            setErrorNombre(true);
-            hasError = true;
+        if (nombre === "" || correo === "" || pais === "" || contraseña === "" || confirmarContraseña === "") {
+            setError(true);
+            return;
         }
-        if (pais === "") {
-            setErrorPais(true);
-            hasError = true;
-        }
-        if (gmail === "") {
-            setErrorGmail(true);
-            hasError = true;
-        }
-        if (contraseña === "") {
-            setErrorContraseña(true);
-            hasError = true;
-        }
-        if (contraseña !== confirmarContraseña) {
-            setErrorContraseñasNoCoinciden(true);
-            hasError = true;
-        }
-
-        if (!hasError) {
-            navigate('/login');
-        }        
+        setError(false);
+        // Aquí iría la lógica para enviar los datos al servidor
+        // Después de procesar los datos, redirige al usuario a la página de login
+        navigate('/login'); // Navega a la página de login
     };
 
-
     return (
-        <section className="Registro" >
-            <h1>Registro</h1>
-            <form className="Formulario" onSubmit={handleSubmit}>
-                <input 
-                type="text" 
-                value={nombre} 
-                onChange={e => setNombre(e.target.value)} 
-                placeholder="Ingrese un nombre" />
-                {errorNombre && <p>El nombre es obligatorio.</p>}
-                {/* {...register("name", {required : true})} */}
-                <input type="text" value={pais} onChange={e => setPais(e.target.value)} placeholder="Ingrese su país" />
-                {errorPais && <p>El país es obligatorio.</p>}
-                <input type="email" value={gmail} onChange={e => setGmail(e.target.value)} placeholder="Ingrese su correo electrónico" />
-                {errorGmail && <p>El correo electrónico es obligatorio.</p>}
-                <input type="password" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Ingrese una contraseña"/>
-                {errorContraseña && <p>La contraseña es obligatoria.</p>}
-                <input type="password" value={confirmarContraseña} onChange={e => setConfirmarContraseña(e.target.value)} placeholder="Confirme su contraseña" />
-                {errorContraseñasNoCoinciden && <p>Las contraseñas no coinciden.</p>}
-                <button type="submit" className="button-link">Registrarse</button>
+        <section className="Registro">
+            <h1 className="Registro__titulo">Registro</h1>
+            <form onSubmit={handleSubmit} className="Registro__form">
+                <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre" required className="Registro__input" />
+                <input type="email" value={correo} onChange={e => setCorreo(e.target.value)} placeholder="Correo Electrónico" required className="Registro__input" />
+                <input type="text" value={pais} onChange={e => setPais(e.target.value)} placeholder="País" required className="Registro__input" />
+                <input type="password" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Contraseña" required className="Registro__input" />
+                <input type="password" value={confirmarContraseña} onChange={e => setConfirmarContraseña(e.target.value)} placeholder="Confirmar Contraseña" required className="Registro__input" />
+                {error && <p>Por favor, completa todos los campos.</p>}
+                <button type="submit" className="Registro__button">Registrarse</button>
             </form>
+            <Link to="/login" className="link-registro">¿Ya tienes cuenta?</Link>
         </section>
     );
 }
