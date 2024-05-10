@@ -4,6 +4,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'name', 'country', 'actions', 'saldo', 'mail', 'password')
+        
+        def validate_mail(self, value):
+        # Verificar si el correo electrónico ya está en uso
+            if User.objects.filter(mail=value).exists():
+                raise serializers.ValidationError("Este correo electrónico ya está registrado.")
+            return value
 
 class ActionSerializer(serializers.ModelSerializer):
     class Meta:

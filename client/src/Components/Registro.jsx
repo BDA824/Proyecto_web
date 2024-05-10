@@ -6,20 +6,25 @@ import './Registro.css';
 import {toast} from 'react-hot-toast'
 
 export default function Registro() {
-    const [nombre, setNombre] = useState("");
-    const [correo, setCorreo] = useState("");
-    const [pais, setPais] = useState("");
-    const [contraseña, setContraseña] = useState("");
-    const [confirmarContraseña, setConfirmarContraseña] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate(); // Usa useNavigate para la navegación
     const {register, handleSubmit, formState: {
         errors
     }} = useForm()
 
     const onSubmit = handleSubmit(async (data) => {
-        await createUser(data);
-        toast.success("Registro exitoso")
-        navigate("/login")
+        try{
+            await createUser(data);
+            toast.success("Registro exitoso")
+            navigate("/login")
+        }catch (error) {
+            if (error.response && error.response.status === 400) {
+                toast.error("El usuario ya existe");
+            } else {
+                console.error("Error al crear usuario:", error);
+                toast.error("Se produjo un error al procesar la solicitud");
+            }
+        }
 
     })
     return (
