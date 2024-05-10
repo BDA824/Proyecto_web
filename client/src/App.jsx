@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Formulario from './Components/Formulario';
 import Registro from './Components/Registro';
-import Productos from './Productos/Productos'; // Importa el componente Productos
+import Productos from './Productos/Productos';
+import {Toaster} from 'react-hot-toast'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/create-account" element={<Registro />} />
         <Route path="/Productos" element={<Productos />} /> {/* Ruta para el componente Productos */}
       </Routes>
+      <Toaster/>
     </BrowserRouter>
   );
 }

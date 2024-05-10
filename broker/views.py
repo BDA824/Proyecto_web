@@ -1,31 +1,43 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .serializer import UserSerializer, ActionSerializer, BuySerializer, CountrySerializer, ManagerSerializer, BrokerSerializer, CurrencySerializer
-from .models import user, action, buy, country, manager, broker, currency
+from .models import User, Action, Buy, Country, Manager, Broker, Currency
 
-class UserView(viewsets.ReadOnlyModelViewSet):
+class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    queryset =  user.objects.all()
+    queryset = User.objects.all()  # Esta línea debe estar dentro de la clase
 
-class ActionView(viewsets.ReadOnlyModelViewSet):
+class ActionView(viewsets.ModelViewSet):
     serializer_class = ActionSerializer
-    queryset =  action.objects.all()
+    queryset =  Action.objects.all()
 
-class BuyView(viewsets.ReadOnlyModelViewSet):
+class BuyView(viewsets.ModelViewSet):
     serializer_class = BuySerializer
-    queryset =  buy.objects.all()
+    queryset =  Buy.objects.all()
 
-class CountryView(viewsets.ReadOnlyModelViewSet):
+class CountryView(viewsets.ModelViewSet):
     serializer_class = CountrySerializer
-    queryset =  country.objects.all()
+    queryset =  Country.objects.all()
 
-class ManagerView(viewsets.ReadOnlyModelViewSet):
+class ManagerView(viewsets.ModelViewSet):
     serializer_class = ManagerSerializer
-    queryset =  manager.objects.all()
+    queryset =  Manager.objects.all()
 
-class BrokerView(viewsets.ReadOnlyModelViewSet):
+class BrokerView(viewsets.ModelViewSet):
     serializer_class = BrokerSerializer
-    queryset =  broker.objects.all()
+    queryset =  Broker.objects.all()
 
-class CurrencyView(viewsets.ReadOnlyModelViewSet):
+class CurrencyView(viewsets.ModelViewSet):
     serializer_class = CurrencySerializer
-    queryset =  currency.objects.all()
+    queryset =  Currency.objects.all()
+
+
+class UserCreateAPIView(viewsets.ViewSet):
+    def create(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
