@@ -5,5 +5,5 @@ const BrokerAPI = axios.create({
 });
 
 export const createUser = (data) => {
-    BrokerAPI.post("http://localhost:8000/broker/api/v1/create-user/", data)
+    return BrokerAPI.post("/", data)
 };
