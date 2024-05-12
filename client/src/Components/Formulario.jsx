@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {toast} from 'react-hot-toast';
 import './Formulario.css';
 
 export default function Formulario() {
@@ -11,6 +12,7 @@ export default function Formulario() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (nombre === "" || contraseña === "") {
+            toast.error("Porfavor complete la informacion")
             setError(true);
             return;
         }

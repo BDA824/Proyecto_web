@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import UserView, ActionView, BuyView, CountryView, ManagerView, BrokerView, CurrencyView, CreateUser
+from .views import UserView, ActionView, BuyView, CountryView, ManagerView, BrokerView, CurrencyView, CreateUser, LoginUser
 
 router = routers.DefaultRouter()
 router.register(r"users", UserView, "users")
@@ -11,6 +11,7 @@ router.register(r"managers", ManagerView, "managers")
 router.register(r"brokers", BrokerView, "brokers")
 router.register(r"currencys", CurrencyView, "currencys")
 router.register(r"create-user", CreateUser, "create-user")
+router.register(r"login-user", LoginUser, "login-user")
 
 urlpatterns = [
     path("api/v1/", include(router.urls)),

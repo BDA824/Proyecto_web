@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import UserSerializer, ActionSerializer, BuySerializer, CountrySerializer, ManagerSerializer, BrokerSerializer, CurrencySerializer
 from .models import User, Action, Buy, Country, Manager, Broker, Currency
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
+
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
@@ -40,4 +43,18 @@ class CreateUser(viewsets.ViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+class LoginUser(viewsets.ViewSet):
+    def create(self, request):
+        print("Entre a la validacion")
+        username = request.data.get('mail')
+        password = request.data.get('password')
+        print(username, password)
+        user = authenticate(mail=username, password=password)
+        print(user)
+        if user is not None:
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
     
