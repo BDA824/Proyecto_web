@@ -15,16 +15,14 @@ export default function Formulario() {
             return;
         }
         setError(false);
-        // Aquí iría la lógica para enviar los datos al servidor
-        // Después de enviar los datos, redirige al usuario a la página de productos
-        navigate('/productos');
+        
     };
 
     return (
         <section className="Formulario">
             <h1 className="Formulario__titulo">Login</h1>
             <form onSubmit={handleSubmit} className="Formulario__form">
-                <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre de usuario" required className="Formulario__input" />
+                <input type="email" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Email" required className="Formulario__input" />
                 <input type="password" value={contraseña} onChange={e => setContraseña(e.target.value)} placeholder="Contraseña" required className="Formulario__input" />
                 {error && <p>Por favor, completa todos los campos.</p>}
                 <button type="submit" className="Formulario__button">Iniciar Sesión</button>
