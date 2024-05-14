@@ -9,6 +9,7 @@ export default function Registro() {
     const [error, setError] = useState("");
     const navigate = useNavigate(); // Usa useNavigate para la navegación
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const {nombre, setNombre} = useState();
 
     const onSubmit = handleSubmit(async (data) => {
         // Validación adicional para asegurar que las contraseñas coincidan
@@ -24,9 +25,10 @@ export default function Registro() {
             navigate("/login");
         } catch (error) {
             if (error.response && error.response.status === 400) {
+                // Vaciar todos los campos
                 toast.error("El usuario ya existe");
             } else {
-                console.error("Error al crear usuario:", error);
+                // Vaciar todos los campos
                 toast.error("Se produjo un error al procesar la solicitud");
             }
         }
@@ -39,8 +41,9 @@ export default function Registro() {
                 <input 
                     type="text" 
                     name="name" 
-                    placeholder="Nombre" 
-                    className="Registro__input" 
+                    placeholder="Nombre"
+                    value={nombre}
+                    className="Registro__input"
                     {...register("name", { required: true })}
                 />
                 <input 
