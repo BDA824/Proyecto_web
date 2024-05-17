@@ -45,9 +45,6 @@ export default function Registro() {
 
     return (
         <section className="Registro">
-            <div className="view">
-                <Main />
-            </div>
             <img src={img} alt="No se pudo cargar imagen" className="img-profile" />
             <h2>Registrarse</h2>
             <form onSubmit={onSubmit} className="Registro__form">

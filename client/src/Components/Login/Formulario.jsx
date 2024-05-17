@@ -36,9 +36,6 @@ export default function Formulario() {
 
     return (
         <section className="Formulario"> 
-            <div>
-                <Main />
-            </div>
             <h1 className="Formulario__titulo">Login</h1>
             <form onSubmit={onSubmit} className="Formulario__form">
                 <input 
