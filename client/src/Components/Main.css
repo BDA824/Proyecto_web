@@ -1,0 +1,63 @@
+.center {
+    position: fixed;    
+    top: 10px;
+    width: 100%;
+    color: white;
+    padding: 10px 0;
+    right: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.redirect-page {
+    border: none; 
+    color: #3CA6A6; 
+    padding: 10px 28px;
+    margin: 15px;
+    cursor: pointer; 
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.redirect-page:hover {
+    background: #0b7dda;
+    color: white;
+}
+
+.redirect-page:hover {
+    background: #012E40;
+    color: white;
+}
+
+.header-page {
+    left: 0;
+}
+
+.redirect-options-view {
+    margin-left: 250px;
+}
+
+.redirect-view {
+    color: aliceblue;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.redirect-view::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px; /* Grosor del subrayado */
+    background-color: black; /* Color del subrayado */
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+  }
+  
+  /* Animar el subrayado al pasar el cursor */
+  .redirect-view:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+

@@ -5,11 +5,13 @@ import Formulario from './Components/Formulario';
 import Registro from './Components/Registro';
 import Productos from './Productos/Productos';
 import {Toaster} from 'react-hot-toast'
+import Main from './Components/Main';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/home" element={<Main />} />
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Formulario />} />
         <Route path="/create-account" element={<Registro />} />
