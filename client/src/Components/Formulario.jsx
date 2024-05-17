@@ -11,6 +11,13 @@ export default function Formulario() {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     const { register, handleSubmit} = useForm();
+    const [Password, setPassword] = useState("");
+    
+    const limpiarCampos = () => {
+       
+        setPassword("");
+        
+      };
 
     const onSubmit = handleSubmit (async (data) => {
         setError(false);
@@ -21,10 +28,12 @@ export default function Formulario() {
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 // Vaciar los campos email y password
-                toast.error("Contraseña invalida");
+                toast.error("Contraseña inválida");
+                limpiarCampos(); // Limpia el campo de contraseña
             } else {
                 // Vaciar los campos email y password
                 toast.error("El usuario con este correo no ha sido encontrado");
+                limpiarCampos(); // Limpia el campo de contraseña
             }
         }
     });
@@ -40,9 +49,11 @@ export default function Formulario() {
                 {...register("mail", { required: true })}
                  />
                 <input 
-                type="password"  
+                type="password" value="Password" 
                 placeholder="Contraseña" 
                 className="Formulario__input"
+
+
                 {...register("password", { required: true })} 
                 />
                 {error && <p>Por favor, completa todos los campos.</p>}

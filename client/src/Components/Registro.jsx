@@ -7,13 +7,12 @@ import { toast } from 'react-hot-toast';
 
 export default function Registro() {
     const [error, setError] = useState("");
-    const navigate = useNavigate(); // Usa useNavigate para la navegación
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const {nombre, setNombre} = useState();
+    const [nombre, setNombre] = useState(""); // Agrega el estado para el nombre
 
     const onSubmit = handleSubmit(async (data) => {
-        // Validación adicional para asegurar que las contraseñas coincidan
-        if (data.password!== data.confirmarPassword) {
+        if (data.password !== data.confirmarPassword) {
             setError("Las contraseñas no coinciden. Por favor, intenta de nuevo.");
             toast.error("Las contraseñas no coinciden. Por favor, intenta de nuevo.");
             return;
@@ -25,11 +24,9 @@ export default function Registro() {
             navigate("/login");
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                // Vaciar todos los campos
-                toast.error("El usuario ya existe");
+                toast.error("El usuario ya existe. Por favor, intenta con otro nombre de usuario.");
             } else {
-                // Vaciar todos los campos
-                toast.error("Se produjo un error al procesar la solicitud");
+                toast.error("Se produjo un error al procesar la solicitud. Por favor, inténtalo nuevamente más tarde.");
             }
         }
     });
@@ -38,40 +35,43 @@ export default function Registro() {
         <section className="Registro">
             <h1 className="Registro__titulo">Registro</h1>
             <form onSubmit={onSubmit} className="Registro__form">
-                <input 
-                    type="text" 
-                    name="name" 
+                <input
+                    type="text"
+                    name="name"
                     placeholder="Nombre"
-                    value={nombre}
+                  
                     className="Registro__input"
                     {...register("name", { required: true })}
                 />
-                <input 
-                    type="email" 
-                    name="mail" 
-                    placeholder="Correo Electrónico" 
-                    className="Registro__input" 
+                <input
+                    type="email"
+                    name="mail"
+                    placeholder="Correo Electrónico"
+                    className="Registro__input"
                     {...register("mail", { required: true })}
                 />
-                <input 
-                    type="text" 
-                    name="country" 
-                    placeholder="País" 
-                    className="Registro__input"
-                    {...register("country", { required: true })} 
-                />
-                <input 
-                    type="password" 
-                    name="password" 
-                    placeholder="Contraseña" 
+              
+                <select name="pais" id="pais" className="Registro__input" {...register("pais", { required: true })}>
+                    <option value="">Seleccione un país</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Perú">Perú</option>
+                    <option value="México">México</option>
+                </select>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
                     className="Registro__input"
                     {...register("password", { required: true })}
                 />
-                <input 
-                    type="password" 
-                    placeholder="Confirmar Contraseña" 
-                    name="confirmarPassword" 
-                    className="Registro__input" 
+                <input
+                    type="password"
+                    placeholder="Confirmar Contraseña"
+                    name="confirmarPassword"
+                    className="Registro__input"
                     {...register("confirmarPassword", { required: true })}
                 />
                 {errors.confirmarPassword && <p>{errors.confirmarPassword.message}</p>}
