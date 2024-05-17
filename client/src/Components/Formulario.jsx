@@ -4,6 +4,7 @@ import './Formulario.css';
 import { useForm } from 'react-hook-form';
 import { loginUser } from "../api/broker.api";
 import { toast } from 'react-hot-toast';
+import Main from "./Main";
 
 export default function Formulario() {
     const [nombre, setNombre] = useState("");
@@ -40,6 +41,9 @@ export default function Formulario() {
 
     return (
         <section className="Formulario">
+            <div>
+                <Main />
+            </div>
             <h1 className="Formulario__titulo">Login</h1>
             <form onSubmit={onSubmit} className="Formulario__form">
                 <input 
@@ -49,7 +53,7 @@ export default function Formulario() {
                 {...register("mail", { required: true })}
                  />
                 <input 
-                type="password" value="Password" 
+                type="password"
                 placeholder="Contraseña" 
                 className="Formulario__input"
 

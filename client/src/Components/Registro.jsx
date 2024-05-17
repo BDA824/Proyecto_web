@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { createUser } from "../api/broker.api";
 import './Registro.css';
 import { toast } from 'react-hot-toast';
+import Main from "./Main";
 
 export default function Registro() {
     const [error, setError] = useState("");
@@ -33,6 +34,9 @@ export default function Registro() {
 
     return (
         <section className="Registro">
+            <div>
+                <Main />
+            </div>
             <h1 className="Registro__titulo">Registro</h1>
             <form onSubmit={onSubmit} className="Registro__form">
                 <input
