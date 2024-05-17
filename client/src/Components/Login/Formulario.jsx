@@ -7,20 +7,17 @@ import { toast } from 'react-hot-toast';
 import Main from "../Main/Main";
 
 export default function Formulario() {
-    const [nombre, setNombre] = useState("");
-    const [contraseña, setContraseña] = useState("");
     const [error, setError] = useState(false);
     const navigate = useNavigate();
-    const { register, handleSubmit} = useForm();
+    const { register, handleSubmit, reset } = useForm(); // Añade reset de useForm
     const [Password, setPassword] = useState("");
     
     const limpiarCampos = () => {
-       
-        setPassword("");
-        
-      };
+        setPassword('');
+        reset(); // Resetea los valores de los campos del formulario
+    };
 
-    const onSubmit = handleSubmit (async (data) => {
+    const onSubmit = handleSubmit(async (data) => {
         setError(false);
         try {
             await loginUser(data);
@@ -28,37 +25,33 @@ export default function Formulario() {
             navigate("/Productos");
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                // Vaciar los campos email y password
                 toast.error("Contraseña inválida");
-                limpiarCampos(); // Limpia el campo de contraseña
+                limpiarCampos();
             } else {
-                // Vaciar los campos email y password
                 toast.error("El usuario con este correo no ha sido encontrado");
-                limpiarCampos(); // Limpia el campo de contraseña
+                limpiarCampos();
             }
         }
     });
 
     return (
-        <section className="Formulario">
+        <section className="Formulario"> 
             <div>
                 <Main />
             </div>
             <h1 className="Formulario__titulo">Login</h1>
             <form onSubmit={onSubmit} className="Formulario__form">
                 <input 
-                type="email"  
-                placeholder="Email" 
-                className="Formulario__input"
-                {...register("mail", { required: true })}
-                 />
+                    type="email"  
+                    placeholder="Email" 
+                    className="Formulario__input"
+                    {...register("mail", { required: true })}
+                />
                 <input 
-                type="password"
-                placeholder="Contraseña" 
-                className="Formulario__input"
-
-
-                {...register("password", { required: true })} 
+                    type="password"
+                    placeholder="Contraseña" 
+                    className="Formulario__input"
+                    {...register("password", { required: true })} 
                 />
                 {error && <p>Por favor, completa todos los campos.</p>}
                 <button type="submit" className="Formulario__button">Iniciar Sesión</button>

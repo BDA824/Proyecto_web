@@ -61,15 +61,15 @@ export default function EditarPerfil() {
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="editar-perfil-info">
                     <label htmlFor="nombre" className="editar-perfil-label">Nombre:</label>
-                    <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+                    <input placeholder='Nombre' type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
                 </div>
                 <div className="editar-perfil-info">
                     <label htmlFor="correo" className="editar-perfil-label">Correo Electrónico:</label>
-                    <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
+                    <input placeholder='Correo' type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
                 </div>
                 <div className="editar-perfil-info">
                     <label htmlFor="pais" className="editar-perfil-label">País:</label>
-                    <input type="text" value={pais} onChange={(e) => setPais(e.target.value)} required />
+                    <input placeholder='País' type="text" value={pais} onChange={(e) => setPais(e.target.value)} required />
                 </div>
                 <button onClick={handleUpdate}>Guardar Cambios</button>
             </form>

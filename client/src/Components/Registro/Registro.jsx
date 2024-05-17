@@ -6,11 +6,18 @@ import './Registro.css';
 import { toast } from 'react-hot-toast';
 import Main from "../Main/Main";
 import img from '../images/account-profile.svg';
+
 export default function Registro() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [nombre, setNombre] = useState(""); // Agrega el estado para el nombre
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [nombre, setNombre] = useState("");
+
+    const limpiarCampos = () => {
+        reset();
+        setNombre("");
+    };
+    
 
     const onSubmit = handleSubmit(async (data) => {
         if (data.password !== data.confirmarPassword) {
@@ -29,6 +36,10 @@ export default function Registro() {
             } else {
                 toast.error("Se produjo un error al procesar la solicitud. Por favor, inténtalo nuevamente más tarde.");
             }
+        } finally {
+            if (!error) {
+                limpiarCampos();
+            }
         }
     });
 
@@ -37,14 +48,13 @@ export default function Registro() {
             <div className="view">
                 <Main />
             </div>
-            <img src={img} alt="No se pudo cargar imagen" className="img-profile"/>
+            <img src={img} alt="No se pudo cargar imagen" className="img-profile" />
             <h2>Registrarse</h2>
             <form onSubmit={onSubmit} className="Registro__form">
                 <input
                     type="text"
                     name="name"
                     placeholder="Nombre"
-                  
                     className="Registro__input"
                     {...register("name", { required: true })}
                 />
@@ -55,7 +65,7 @@ export default function Registro() {
                     className="Registro__input"
                     {...register("mail", { required: true })}
                 />
-              
+
                 <select name="pais" id="pais" className="Registro__input" {...register("pais", { required: true })}>
                     <option value="">Seleccione un país</option>
                     <option value="Colombia">Colombia</option>

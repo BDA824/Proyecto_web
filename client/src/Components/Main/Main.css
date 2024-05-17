@@ -1,11 +1,18 @@
 .center {
-    position: fixed;    
-    top: 10px;
+    position: fixed;
+    top: 0%;
     width: 100%;
-    color: white;
-    padding: 10px 0;
+    color: rgb(0, 0, 0);
+    padding: 0px 0;
     right: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.header-page {
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .redirect-page {
@@ -54,22 +61,46 @@
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.3s ease-out;
-  }
-  
+}
+
   /* Animar el subrayado al pasar el cursor */
-  .redirect-view:hover::after {
+.redirect-view:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
 
-  .redirect-view {
+.redirect-view {
     position: relative;
     display: inline-block;
-  }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    height: 100vh; /* Asegura que el cuerpo tome toda la altura de la ventana */
+    overflow: hidden; /* Evita el scroll extra */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://i.pinimg.com/564x/26/1e/71/261e71cdb3cdd89ae42a46c4ac943907.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1; 
+}
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
     .center {
         padding: 5px 0;
-      }
     }
+}

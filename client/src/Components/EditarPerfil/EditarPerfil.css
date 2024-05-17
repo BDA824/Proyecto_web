@@ -49,16 +49,16 @@
 }
 
 .editar-perfil input[type="text"],.editar-perfil input[type="email"] {
-    flex-grow: 1;
     padding: 10px;
-    border-radius: 20px; /* Cambiado a 20px para coincidir con el estilo especificado */
-    border: 1px solid #ccc; /* Cambiado a #ccc para coincidir con el estilo especificado */
-    background-color: #282828; /* Cambiado a #282828 para coincidir con el estilo especificado */
-    color: #ffffff; /* Cambiado a #ffffff para coincidir con el estilo especificado */
-    width: 90%; /* Ajustado al 90% para coincidir con el estilo especificado */
-    margin-bottom: 1rem; /* Ajustado a 1rem para coincidir con el estilo especificado */
-    margin-left: 10px; /* Añadido para coincidir con el estilo especificado */
-    box-sizing: border-box; /* Asegura que el padding y el borde sean parte del ancho total */
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+    background-color: #282828;
+    color: #ffffff;
+    width: 90%;
+    margin-bottom: 1rem;
+    margin-left: 10px;
+    box-sizing: border-box;
 }
 
 button {
