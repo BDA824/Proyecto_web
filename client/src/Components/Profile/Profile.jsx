@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Main from "./Main";
+import Main from "../Main/Main";
 import './Profile.css';
 import img from '../images/account-profile.svg';
 import { toast } from 'react-hot-toast';
@@ -41,6 +41,10 @@ export default function Perfil() {
             <div className="Profile__info">
                 <label htmlFor="correo" className="Profile__label">Correo Electrónico:</label>
                 <span>{Object.keys(usuario).length > 0? usuario.correo : ''}</span>
+            </div>
+            <div className="Profile__info">
+                <label htmlFor="pais" className="Profile__label">País:</label>
+                <span>{Object.keys(usuario).length > 0? usuario.pais : ''}</span>
             </div>
         </section>
     );

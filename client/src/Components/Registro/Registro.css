@@ -11,7 +11,7 @@
     background-color: #282828;
     color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+  }
 
 .Registro h1 {
     font-size: 2.5em;
@@ -70,3 +70,9 @@
 h2 {
     margin: 0px;
 }
+
+@media (max-width: 768px) {
+    .Registro {
+       width: 300px;
+     }
+   }

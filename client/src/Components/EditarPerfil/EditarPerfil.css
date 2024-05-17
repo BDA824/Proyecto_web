@@ -1,0 +1,100 @@
+.editar-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background-color: #282828;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 600px;
+    margin: 100px auto;
+}
+
+.editar-perfil-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.img-profile {
+    padding-left: 0!important; /* Elimina cualquier padding-left existente */
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.editar-perfil-titulo {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.editar-perfil-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.editar-perfil-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.editar-perfil input[type="text"],.editar-perfil input[type="email"] {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px; /* Cambiado a 20px para coincidir con el estilo especificado */
+    border: 1px solid #ccc; /* Cambiado a #ccc para coincidir con el estilo especificado */
+    background-color: #282828; /* Cambiado a #282828 para coincidir con el estilo especificado */
+    color: #ffffff; /* Cambiado a #ffffff para coincidir con el estilo especificado */
+    width: 90%; /* Ajustado al 90% para coincidir con el estilo especificado */
+    margin-bottom: 1rem; /* Ajustado a 1rem para coincidir con el estilo especificado */
+    margin-left: 10px; /* Añadido para coincidir con el estilo especificado */
+    box-sizing: border-box; /* Asegura que el padding y el borde sean parte del ancho total */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #282828;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+ .editar-perfil {
+        width: 95%;
+        max-width: 400px;
+    }
+
+ .editar-perfil-titulo {
+        font-size: 20px;
+    }
+
+ .editar-perfil-info {
+        margin-bottom: 10px;
+    }
+
+ .editar-perfil input[type="text"],.editar-perfil input[type="email"] {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}

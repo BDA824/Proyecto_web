@@ -1,10 +1,13 @@
 import React from 'react';
+import Main from "../Main/Main";
+import './AboutUs.css';
 
 const AboutUsPage = () => {
     return (
-        <div>
-            <h1>Quienes Somos</h1>
-            <p>Somos tres estudiantes apasionados por la ingeniería informática en la Universidad de Envigado,
+        <div className="aboutus-container">
+            <Main />
+            <h2 className="aboutus-title">Quienes Somos</h2>
+            <p className="aboutus-content">Somos tres estudiantes apasionados por la ingeniería informática en la Universidad de Envigado,
             dedicados a la innovación y la excelencia académica. Nuestro camino está marcado por el constante
             aprendizaje y la aplicación práctica de nuestros conocimientos. Actualmente, nos encontramos en la
             etapa final de nuestra formación académica, donde estamos canalizando nuestras habilidades y experiencia

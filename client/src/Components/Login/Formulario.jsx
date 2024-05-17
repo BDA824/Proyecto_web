@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './Formulario.css';
 import { useForm } from 'react-hook-form';
-import { loginUser } from "../api/broker.api";
+import { loginUser } from "../../api/broker.api";
 import { toast } from 'react-hot-toast';
-import Main from "./Main";
+import Main from "../Main/Main";
 
 export default function Formulario() {
     const [nombre, setNombre] = useState("");

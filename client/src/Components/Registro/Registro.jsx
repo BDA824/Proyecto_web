@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { createUser } from "../api/broker.api";
+import { createUser } from "../../api/broker.api";
 import './Registro.css';
 import { toast } from 'react-hot-toast';
-import Main from "./Main";
+import Main from "../Main/Main";
 import img from '../images/account-profile.svg';
 export default function Registro() {
     const [error, setError] = useState("");

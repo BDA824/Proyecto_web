@@ -1,9 +1,8 @@
-/* Profile.css */
 .Profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Alinea el contenido principal a la izquierda */
     gap: 1rem;
     width: 400px;
     padding: 20px;
@@ -13,16 +12,29 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.Profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido del header */
+}
+
 .Profile__titulo {
     font-size: 2.5em;
     margin-bottom: 1rem;
+    padding-left: 150px;
+    padding-right: 10px;
+}
+
+.Profile-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea el contenido del body a la izquierda */
 }
 
 .Profile__info {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Alinea los elementos internos horizontalmente */
     align-items: center;
-    gap: 0.5rem;
     padding: 10px;
     border-radius: 10px;
     background-color: #333;
@@ -41,19 +53,15 @@
     text-decoration: none;
 }
 
-.Profile-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; /* Espacio entre el ícono y el título */
-}
-
 .img-profile {
     width: 100px; /* Tamaño del ícono */
     height: auto; /* Mantén la relación de aspecto */
+    padding-left: 150px;
 }
 
-.Profile__titulo {
-    font-size: 1.5em; /* Ajusta el tamaño del título según sea necesario */
-    margin-top: 0; /* Elimina margen superior para que el título esté justo encima del ícono */
+/* Estilos responsivos */
+@media (max-width: 768px) {
+ .Profile {
+       width: 300px;
+     }
 }
