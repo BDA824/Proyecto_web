@@ -5,7 +5,7 @@ import { createUser } from "../api/broker.api";
 import './Registro.css';
 import { toast } from 'react-hot-toast';
 import Main from "./Main";
-
+import img from '../images/account-profile.svg';
 export default function Registro() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -34,10 +34,11 @@ export default function Registro() {
 
     return (
         <section className="Registro">
-            <div>
+            <div className="view">
                 <Main />
             </div>
-            <h1 className="Registro__titulo">Registro</h1>
+            <img src={img} alt="No se pudo cargar imagen" className="img-profile"/>
+            <h2>Registrarse</h2>
             <form onSubmit={onSubmit} className="Registro__form">
                 <input
                     type="text"
