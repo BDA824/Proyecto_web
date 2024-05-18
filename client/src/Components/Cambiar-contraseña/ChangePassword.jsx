@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ChangePassword.css';
 import Main from "../Main/Main";
-import img from "../images/Icono.svg"
+import img from "../images/Icono.svg";
 import { toast } from 'react-hot-toast';
 
 export default function ChangePassword() {
@@ -19,6 +19,7 @@ export default function ChangePassword() {
         }
 
         try {
+            //crear cambiar contraseña en broker
             const response = await axios.put('http://localhost:8000/api/change_password/', {
                 old_password: oldPassword,
                 new_password: newPassword
@@ -26,12 +27,12 @@ export default function ChangePassword() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                withCredentials: true  // Asegura que las cookies de la sesión se envíen con la solicitud
+                withCredentials: true
             });
 
             if (response.data.status === 'success') {
                 toast.success("Contraseña cambiada exitosamente.");
-                navigate('/perfil'); // Redirige a la página de perfil después del cambio
+                navigate('/Profile');
             } else {
                 toast.error(response.data.message || "Error al cambiar la contraseña.");
             }
@@ -44,7 +45,7 @@ export default function ChangePassword() {
     return (
         <section className="change-password">
             <div className="change-password-header">
-            <img src={img} alt="No se pudo cargar imagen" className="img-profile3"/>
+                <img src={img} alt="No se pudo cargar imagen" className="img-profile3" />
                 <Main />
                 <h1 className="change-password-title">Cambiar Contraseña</h1>
             </div>

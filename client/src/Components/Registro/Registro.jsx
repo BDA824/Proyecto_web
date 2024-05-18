@@ -42,7 +42,7 @@ export default function Registro() {
 
     return (
         <section className="Registro">
-            <img src={img} alt="No se pudo cargar imagen" className="img-profile" />
+            <img src={img} alt="No se pudo cargar imagen" className="img-profile1" />
             <h2>Registrarse</h2>
             <form onSubmit={onSubmit} className="Registro__form">
                 <input

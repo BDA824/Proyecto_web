@@ -7,50 +7,69 @@ import img from '../images/account-profile.svg';
 import { toast } from 'react-hot-toast';
 
 export default function EditarPerfil() {
-    const [usuario, setUsuario] = useState({});
+    const [userData, setUserData] = useState({});
     const [nombre, setNombre] = useState('');
     const [correo, setCorreo] = useState('');
     const [pais, setPais] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchUsuario = async () => {
+        const fetchUserData = async () => {
             try {
-                const respuesta = await axios.get('http://localhost:8000');
-                if (respuesta.status === 200) {
-                    setUsuario(respuesta.data);
-                    setNombre(respuesta.data.nombre || '');
-                    setCorreo(respuesta.data.correo || '');
-                    setPais(respuesta.data.pais || '');
-                } else {
-                    throw new Error('Error al cargar los datos del perfil.');
+                const token = localStorage.getItem('token');
+                const userId = localStorage.getItem('userId');
+
+                if (!token || !userId) {
+                    throw new Error('Token o ID de usuario no disponible');
                 }
+
+                const respuesta = await axios.get(`http://localhost:8000/broker/api/v1/users/${userId}/`, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                });
+
+                const userData = respuesta.data;
+                setUserData(userData);
+                setNombre(userData.name);
+                setCorreo(userData.mail);
+                setPais(userData.country);
             } catch (error) {
                 console.error(error);
                 toast.error("Error al cargar los datos del perfil.");
             }
         };
-        fetchUsuario();
+        fetchUserData();
     }, []);
 
     const handleUpdate = async () => {
         try {
             const updatedData = {
-                id: usuario.id,
-                nombre: nombre,
-                correo: correo,
-                pais: pais
+                name: nombre,
+                country: pais
             };
-
-            await axios.post('http://localhost:8000/api/updateUser', updatedData);
+    
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
+    
+            if (!token || !userId) {
+                throw new Error('Token o ID de usuario no disponible');
+            }
+    
+            await axios.patch(`http://localhost:8000/broker/api/v1/users/${userId}/`, updatedData, {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            });
+    
             toast.success("Datos actualizados exitosamente.");
-            navigate('/perfil'); // Redirige a la página de perfil después de la actualización
+            navigate('/Profile'); // Redirige a la página de perfil después de la actualización
         } catch (error) {
             console.error(error);
             toast.error("Error al actualizar los datos del perfil.");
         }
     };
-
+    
     return (
         <section className="editar-perfil">
             <div className="editar-perfil-header">
@@ -65,11 +84,18 @@ export default function EditarPerfil() {
                 </div>
                 <div className="editar-perfil-info">
                     <label htmlFor="correo" className="editar-perfil-label">Correo Electrónico:</label>
-                    <input placeholder='Correo' type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
+                    <input placeholder='Correo' type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} disabled />
                 </div>
                 <div className="editar-perfil-info">
                     <label htmlFor="pais" className="editar-perfil-label">País:</label>
-                    <input placeholder='País' type="text" value={pais} onChange={(e) => setPais(e.target.value)} required />
+                    <select value={pais} onChange={(e) => setPais(e.target.value)} required>
+                        <option value="">Seleccionar país</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Perú">Perú</option>
+                        <option value="México">México</option>
+                    </select>
                 </div>
                 <button onClick={handleUpdate}>Guardar Cambios</button>
             </form>
