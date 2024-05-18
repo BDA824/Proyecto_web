@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ChangePassword.css';
 import Main from "../Main/Main";
-import img from '../images/account-profile.svg';
+import img from "../images/Icono.svg"
 import { toast } from 'react-hot-toast';
 
 export default function ChangePassword() {
@@ -23,12 +23,15 @@ export default function ChangePassword() {
                 old_password: oldPassword,
                 new_password: newPassword
             }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 withCredentials: true  // Asegura que las cookies de la sesión se envíen con la solicitud
             });
 
             if (response.data.status === 'success') {
                 toast.success("Contraseña cambiada exitosamente.");
-                navigate('/Profile');
+                navigate('/perfil'); // Redirige a la página de perfil después del cambio
             } else {
                 toast.error(response.data.message || "Error al cambiar la contraseña.");
             }
@@ -47,9 +50,9 @@ export default function ChangePassword() {
             </div>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="change-password-info">
-                    <label htmlFor="oldPassword" className="change-password-label">Contraseña Antigua:</label>
+                    <label htmlFor="oldPassword" className="change-password-label">Contraseña antigua:</label>
                     <input 
-                        placeholder='Contraseña Antigua' 
+                        placeholder='Contraseña antigua' 
                         type="password" 
                         value={oldPassword} 
                         onChange={(e) => setOldPassword(e.target.value)} 
@@ -57,9 +60,9 @@ export default function ChangePassword() {
                     />
                 </div>
                 <div className="change-password-info">
-                    <label htmlFor="newPassword" className="change-password-label">Nueva Contraseña:</label>
+                    <label htmlFor="newPassword" className="change-password-label">Nueva contraseña:</label>
                     <input 
-                        placeholder='Nueva Contraseña' 
+                        placeholder='Nueva contraseña' 
                         type="password" 
                         value={newPassword} 
                         onChange={(e) => setNewPassword(e.target.value)} 
@@ -67,16 +70,16 @@ export default function ChangePassword() {
                     />
                 </div>
                 <div className="change-password-info">
-                    <label htmlFor="confirmPassword" className="change-password-label">Confirmar Nueva Contraseña:</label>
+                    <label htmlFor="confirmPassword" className="change-password-label">Confirmar nueva contraseña:</label>
                     <input 
-                        placeholder='Confirmar Nueva Contraseña' 
+                        placeholder='Confirmar nueva contraseña' 
                         type="password" 
                         value={confirmPassword} 
                         onChange={(e) => setConfirmPassword(e.target.value)} 
                         required 
                     />
                 </div>
-                <button onClick={handleChangePassword}>Cambiar Contraseña</button>
+                <button onClick={handleChangePassword}>Cambiar contraseña</button>
             </form>
         </section>
     );
