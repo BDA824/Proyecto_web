@@ -12,31 +12,66 @@
     top: 0;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
-    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .redirect-page {
     border: none; 
-    color: #3CA6A6; 
+    color: #00ffff; 
     padding: 10px 28px;
     margin: 5px;
     cursor: pointer; 
-    border-radius: 5px;
     text-decoration: none;
+    position: relative; /* Para el efecto de subrayado */
 }
 
-.redirect-page:hover {
-    background: #0b7dda;
-    color: white;
-}
-
-.redirect-page:hover {
-    background: #012E40;
-    color: white;
-}
-
-.header-page {
+.redirect-page::after {
+    content: '';
+    position: absolute;
     left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3CA6A6;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.redirect-page:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.logout-link {
+    border: none; 
+    color: #00ffff; 
+    padding: 10px 28px; /* Mismo padding que los otros enlaces */
+    margin: 0px;
+    cursor: pointer; 
+    text-decoration: none;
+    position: relative; /* Para el efecto de subrayado */
+    margin-left: auto; /* Para alinearlo a la derecha */
+}
+
+.logout-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3CA6A6;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.logout-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 .redirect-options-view {
@@ -48,6 +83,7 @@
     text-decoration: none;
     margin: 10px;
     padding: 5px;
+    position: relative; /* Para el efecto de subrayado */
 }
 
 .redirect-view::after {
@@ -56,22 +92,16 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px; /* Grosor del subrayado */
-    background-color: #3D5A73; /* Color del subrayado */
+    height: 2px;
+    background-color: #3D5A73;
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.3s ease-out;
 }
 
-  /* Animar el subrayado al pasar el cursor */
 .redirect-view:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
-}
-
-.redirect-view {
-    position: relative;
-    display: inline-block;
 }
 
 body {
@@ -79,8 +109,8 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     position: relative;
-    height: 100vh; /* Asegura que el cuerpo tome toda la altura de la ventana */
-    overflow: hidden; /* Evita el scroll extra */
+    height: 100vh;
+    overflow: hidden;
 }
 
 body::before {
@@ -98,20 +128,6 @@ body::before {
     z-index: -1; 
 }
 
-.logout-button {
-    border: none;
-    background-color: transparent;
-    color: #3CA6A6;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-    float: right; /* Alinea el botón a la derecha */
-}
-
-
-/* Estilos responsivos */
 @media (max-width: 768px) {
     .center {
         padding: 5px 0;
