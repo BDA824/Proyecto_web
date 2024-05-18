@@ -17,7 +17,7 @@ export default function Main() {
                 <div>
                     <Link className='redirect-page' to='/Profile'>Perfil</Link>
                     <Link className='redirect-page' to='/EditarPerfil'>Actualizar datos</Link>
-                    <Link className='redirect-page' to='/login'>Cambiar contraseña</Link>
+                    <Link className='redirect-page' to='/ChangePassword'>Cambiar contraseña</Link>
                 </div>
                 <span className='redirect-options-view'>
                     <Link className='redirect-view' to='/traders'>Para traders</Link>

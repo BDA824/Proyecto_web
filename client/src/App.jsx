@@ -10,6 +10,7 @@ import AboutUsPage from './Components/About-us/AboutUs';
 import TradersPage from './Components/Traders/Traders';
 import WalletPage from './Components/Wallet/Wallet';
 import EditarPerfil from './Components/EditarPerfil/EditarPerfil';
+import ChangePassword from './Components/Cambiar-contraseña/ChangePassword';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Formulario />} />
         <Route path="/create-account" element={<Registro />} />
         <Route path="/EditarPerfil" element={<EditarPerfil />} />
+        <Route path="/ChangePassword" element={<ChangePassword />} />
         <Route path="/home" element={<Main />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/About-us" element={<AboutUsPage />} /> 
