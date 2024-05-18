@@ -20,7 +20,7 @@ export default function Formulario() {
         setError(false);
         try {
             const response = await loginUser(data);
-            const user = response.data;
+            const { user } = response.data;
             console.log(user.name)
             toast.success(`Bienvenido, ${user.name}`);
             navigate("/About-us");
