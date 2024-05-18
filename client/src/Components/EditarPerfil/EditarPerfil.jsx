@@ -55,7 +55,7 @@ export default function EditarPerfil() {
         <section className="editar-perfil">
             <div className="editar-perfil-header">
                 <Main />
-                <img src={img} alt="No se pudo cargar imagen" className="img-profile"/>
+                <img src={img} alt="No se pudo cargar imagen" className="img-profile2"/>
                 <h1 className="editar-perfil-titulo">Editar Perfil</h1>
             </div>
             <form onSubmit={(e) => e.preventDefault()}>

@@ -24,7 +24,7 @@
     margin: 5px;
     cursor: pointer; 
     text-decoration: none;
-    position: relative; /* Para el efecto de subrayado */
+    position: relative;
 }
 
 .redirect-page::after {
@@ -48,12 +48,12 @@
 .logout-link {
     border: none; 
     color: #00ffff; 
-    padding: 10px 28px; /* Mismo padding que los otros enlaces */
+    padding: 10px 28px;
     margin: 0px;
     cursor: pointer; 
     text-decoration: none;
-    position: relative; /* Para el efecto de subrayado */
-    margin-left: auto; /* Para alinearlo a la derecha */
+    position: relative;
+    margin-left: auto;
 }
 
 .logout-link::after {
@@ -83,7 +83,7 @@
     text-decoration: none;
     margin: 10px;
     padding: 5px;
-    position: relative; /* Para el efecto de subrayado */
+    position: relative;
 }
 
 .redirect-view::after {
