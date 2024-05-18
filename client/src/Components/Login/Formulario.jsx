@@ -19,8 +19,10 @@ export default function Formulario() {
     const onSubmit = handleSubmit(async (data) => {
         setError(false);
         try {
-            await loginUser(data);
-            toast.success("Bienvenido");
+            const response = await loginUser(data);
+            const user = response.data;
+            console.log(user.name)
+            toast.success(`Bienvenido, ${user.name}`);
             navigate("/About-us");
         } catch (error) {
             if (error.response && error.response.status === 400) {
