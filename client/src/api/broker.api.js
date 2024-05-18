@@ -20,3 +20,7 @@ export const loginUser = (data) => {
         }
     });
 };
+
+export const logoutUser = () => {
+    return axios.post("http://localhost:8000/logout");
+};

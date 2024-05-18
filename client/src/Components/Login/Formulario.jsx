@@ -4,17 +4,16 @@ import './Formulario.css';
 import { useForm } from 'react-hook-form';
 import { loginUser } from "../../api/broker.api";
 import { toast } from 'react-hot-toast';
-import Main from "../Main/Main";
 
 export default function Formulario() {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
-    const { register, handleSubmit, reset } = useForm(); // Añade reset de useForm
+    const { register, handleSubmit, reset } = useForm();
     const [Password, setPassword] = useState("");
     
     const limpiarCampos = () => {
         setPassword('');
-        reset(); // Resetea los valores de los campos del formulario
+        reset();
     };
 
     const onSubmit = handleSubmit(async (data) => {
@@ -22,7 +21,7 @@ export default function Formulario() {
         try {
             await loginUser(data);
             toast.success("Bienvenido");
-            navigate("/Productos");
+            navigate("/About-us");
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 toast.error("Contraseña inválida");

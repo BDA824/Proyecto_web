@@ -98,6 +98,19 @@ body::before {
     z-index: -1; 
 }
 
+.logout-button {
+    border: none;
+    background-color: transparent;
+    color: #3CA6A6;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    float: right; /* Alinea el botón a la derecha */
+}
+
+
 /* Estilos responsivos */
 @media (max-width: 768px) {
     .center {
