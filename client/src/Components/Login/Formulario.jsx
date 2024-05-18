@@ -4,6 +4,7 @@ import './Formulario.css';
 import { useForm } from 'react-hook-form';
 import { loginUser } from "../../api/broker.api";
 import { toast } from 'react-hot-toast';
+import Perfil from '../Profile/Profile.jsx'
 
 export default function Formulario() {
     const [error, setError] = useState(false);
@@ -23,6 +24,7 @@ export default function Formulario() {
             const { user } = response.data;
             console.log(user.name)
             toast.success(`Bienvenido, ${user.name}`);
+            // <Perfil data={user}/>
             navigate("/About-us");
         } catch (error) {
             if (error.response && error.response.status === 400) {
