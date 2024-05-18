@@ -6,27 +6,10 @@ import './Profile.css';
 import img from '../images/account-profile.svg';
 import { toast } from 'react-hot-toast';
 
-export default function Perfil() {
+export default function Perfil({ data }) {
     const [usuario, setUsuario] = useState({});
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchUsuario = async () => {
-            try {
-                const respuesta = await axios.get('http://localhost:8000');
-                if (respuesta.status === 200) {
-                    setUsuario(respuesta.data);
-                } else {
-                    throw new Error('Error al cargar los datos del perfil.');
-                }
-            } catch (error) {
-                console.error(error);
-                toast.error("Error al cargar los datos del perfil.");
-            }
-        };
-        fetchUsuario();
-    }, []);
-
+    console.log(data)
     return (
         <section className="Profile">
             <div className="Profile-header">
@@ -36,15 +19,15 @@ export default function Perfil() {
             </div>
             <div className="Profile__info">
                 <label htmlFor="nombre" className="Profile__label">Nombre:</label>
-                <span>{Object.keys(usuario).length > 0? usuario.nombre : ''}</span>
+                <span>Camil</span>
             </div>
             <div className="Profile__info">
                 <label htmlFor="correo" className="Profile__label">Correo Electrónico:</label>
-                <span>{Object.keys(usuario).length > 0? usuario.correo : ''}</span>
+                <span>Camil</span>
             </div>
             <div className="Profile__info">
                 <label htmlFor="pais" className="Profile__label">País:</label>
-                <span>{Object.keys(usuario).length > 0? usuario.pais : ''}</span>
+                <span>Camil</span>
             </div>
         </section>
     );
