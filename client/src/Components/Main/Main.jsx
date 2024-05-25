@@ -20,7 +20,9 @@ export default function Main() {
                     <Link className='redirect-page' to='/ChangePassword'>Cambiar contraseña</Link>
                 </div>
                 <span className='redirect-options-view'>
-                    <Link className='redirect-view' to='/traders'>Para traders</Link>
+                    <Link className='redirect-view' to='/traders'>Acciones</Link>
+                    <Link className='redirect-view' to='/traders'>Gestoras</Link>
+                    <Link className='redirect-view' to='/traders'>Brokers</Link>
                     <Link className='redirect-view' to='/wallet'>Mi billetera</Link>
                     <Link className='redirect-view' to='/About-us'>Quienes somos</Link>
                 </span>
