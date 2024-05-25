@@ -21,7 +21,7 @@ class Country(models.Model):
 class Action(models.Model):
     name = models.CharField(max_length=48)
     value = models.DecimalField(max_digits=200, decimal_places=2)
-   # country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class Action(models.Model):
 class Buy(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     action = models.ForeignKey(Action, on_delete=models.CASCADE)
-   # country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.user.name

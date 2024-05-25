@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializer import UserSerializer, ActionSerializer, BuySerializer, CountrySerializer, ManagerSerializer, BrokerSerializer, CurrencySerializer
 from .models import User, Action, Buy, Country, Manager, Broker, Currency
-from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
 class UserView(viewsets.ModelViewSet):
@@ -54,3 +54,24 @@ def LoginUser(request):
     serializer = UserSerializer(instance=user)
     
     return Response({'user': serializer.data}, status=status.HTTP_200_OK)   
+
+class ActionsByCountryView(APIView):
+    print("Entre a la validacion1")
+    def get(self, request, country):
+        print("Entre a la validacion", country)
+        if country == "Colombia":
+            country = 1
+        if country == "Argentina":
+            country = 2
+        if country == "Mexico":
+            country = 3
+        if country == "Peru":
+            country = 4
+        if country == "Chile":
+            country = 5
+        
+        actions = Action.objects.filter(country=country)
+        if actions.exists():
+            serializer = ActionSerializer(actions, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"detail": "No actions found for this country"}, status=status.HTTP_404_NOT_FOUND)
