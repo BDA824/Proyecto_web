@@ -10,7 +10,7 @@ export default function Formulario() {
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm();
     const [Password, setPassword] = useState("");
-    
+
     const limpiarCampos = () => {
         setPassword('');
         reset();
@@ -20,9 +20,7 @@ export default function Formulario() {
         setError(false);
         try {
             const response = await loginUser(data);
-            const { user, token } = response.data;
-            localStorage.setItem('token', token); // Almacenar el token en localStorage
-            localStorage.setItem('userId', user.id); // Almacenar el ID del usuario en localStorage
+            const { user } = response.data;
             toast.success(`Bienvenido, ${user.name}`);
             navigate("/About-us");
         } catch (error) {

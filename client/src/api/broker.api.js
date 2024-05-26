@@ -13,14 +13,34 @@ export const createUser = (data) => {
     });
 };
 
-export const loginUser = (data) => {
-    return axios.post("http://localhost:8000/login", data, {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
+export const loginUser = async (data) => {
+    try {
+        const response = await axios.post("http://localhost:8000/login", data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const { user } = response.data;
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('userCountryId', user.country);
+        return response;
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const logoutUser = () => {
     return axios.post("http://localhost:8000/logout");
+};
+
+export const getActionsByCountry = (countryId) => {
+    return BrokerAPI.get(`http://localhost:8000/api/actions/${countryId}`);
+};
+
+export const getGestorasByCountry = (countryId) => {
+    return BrokerAPI.get('/gestoras/${countryId}/');
+};
+
+export const getBrokersByCountry = (countryId) => {
+    return BrokerAPI.get('/brokers/${countryId}/');
 };

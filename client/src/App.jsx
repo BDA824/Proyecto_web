@@ -7,7 +7,9 @@ import {Toaster} from 'react-hot-toast'
 import Main from './Components/Main/Main';
 import Profile from './Components/Profile/Profile'
 import AboutUsPage from './Components/About-us/AboutUs';
-import TradersPage from './Components/Traders/Traders';
+import AccionesPage from './Components/Acciones/Acciones';
+import GestorasPage from './Components/Gestoras/Gestoras';
+import BrokersPage from './Components/Brokers/Brokers';
 import WalletPage from './Components/Wallet/Wallet';
 import EditarPerfil from './Components/EditarPerfil/EditarPerfil';
 import ChangePassword from './Components/Cambiar-contraseña/ChangePassword';
@@ -24,7 +26,9 @@ function App() {
         <Route path="/home" element={<Main />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/About-us" element={<AboutUsPage />} /> 
-        <Route path="/Traders" element={<TradersPage />} />
+        <Route path="/Acciones" element={<AccionesPage />} />
+        <Route path='/Gestoras' element={<GestorasPage />} />
+        <Route path='/Brokers' element={<BrokersPage />} />
         <Route path="/Wallet" element={<WalletPage />} />
       </Routes>
       <Toaster/>
