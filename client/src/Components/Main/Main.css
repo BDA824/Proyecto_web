@@ -93,7 +93,7 @@
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #3D5A73;
+    background-color: #3CA6A6;
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.3s ease-out;
