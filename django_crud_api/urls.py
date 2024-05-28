@@ -23,4 +23,6 @@ urlpatterns = [
     path('broker/', include('broker.urls')),
     re_path("login", views.LoginUser),
     path('api/actions/<str:country>/', views.ActionsByCountryView.as_view(), name='actions-by-country'),
+    path('api/managers/<str:country>/', views.ManagersByCountryView.as_view(), name='managers-by-country'),
+    path('api/brokers/<str:country>/', views.BrokersByCountryView.as_view(), name='brokers-by-country'),
 ]

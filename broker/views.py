@@ -75,3 +75,45 @@ class ActionsByCountryView(APIView):
             serializer = ActionSerializer(actions, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({"detail": "No actions found for this country"}, status=status.HTTP_404_NOT_FOUND)
+
+class ManagersByCountryView(APIView):
+    print("Entre a la validacion1")
+    def get(self, request, country):
+        print("Entre a la validacion", country)
+        if country == "Colombia":
+            country = 1
+        if country == "Argentina":
+            country = 2
+        if country == "Mexico":
+            country = 3
+        if country == "Peru":
+            country = 4
+        if country == "Chile":
+            country = 5
+        
+        managers = Manager.objects.filter(country=country)
+        if managers.exists():
+            serializer = ManagerSerializer(managers, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"detail": "No managers found for this country"}, status=status.HTTP_404_NOT_FOUND)
+    
+class BrokersByCountryView(APIView):
+    print("Entre a la validacion1")
+    def get(self, request, country):
+        print("Entre a la validacion", country)
+        if country == "Colombia":
+            country = 1
+        if country == "Argentina":
+            country = 2
+        if country == "Mexico":
+            country = 3
+        if country == "Peru":
+            country = 4
+        if country == "Chile":
+            country = 5
+        
+        brokers = Broker.objects.filter(country=country)
+        if brokers.exists():
+            serializer = BrokerSerializer(brokers, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"detail": "No brokers found for this country"}, status=status.HTTP_404_NOT_FOUND)
