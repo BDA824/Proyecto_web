@@ -1,57 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { getGestorasByCountry } from '../../api/broker.api';
+import React, { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import './Gestoras.css';
+import { getGestorasByCountry } from '../../api/broker.api';
+import { toast } from 'react-hot-toast';
 
-const Gestoras = () => {
+const Gestora = () => {
     const [gestoras, setGestoras] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const countryId = localStorage.getItem('userCountryId');
+
+    const fetchGestorasByCountry = async (countryId) => {
+        try {
+            const response = await getGestorasByCountry(countryId);
+            const gestorasData = Array.isArray(response.data) ? response.data : [];
+            setGestoras(gestorasData);
+        } catch (error) {
+            console.error('Error fetching gestoras:', error);
+            toast.error('Error al obtener gestoras disponibles');
+        }
+    };
 
     useEffect(() => {
-        const fetchGestoras = async () => {
-            try {
-                const response = await getGestorasByCountry(countryId);
-                setGestoras(response.data);
-            } catch (error) {
-                console.error('Error al cargar las gestoras:', error);
-            } finally {
-                setLoading(false);
+        const handleStorageChange = () => {
+            const userCountryId = localStorage.getItem('userCountryId');
+            if (userCountryId) {
+                fetchGestorasByCountry(userCountryId);
             }
         };
 
-        fetchGestoras();
-    }, [countryId]);
+        window.addEventListener('storage', handleStorageChange);
+
+        const initialCountryId = localStorage.getItem('userCountryId');
+        if (initialCountryId) {
+            fetchGestorasByCountry(initialCountryId);
+        }
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
 
     return (
         <div className="gestoras-container">
             <Main />
-            <h1 className="title-gestoras">Gestoras Disponibles</h1>
+            <h1 className="title-gestoras">Gestoras disponibles</h1>
             <div className="cards-container">
-                {loading ? (
-                    <p>Cargando gestoras...</p>
-                ) : (
-                    gestoras.map((gestora) => (
-                        <div key={gestora.id} className="card-complete">
-                            <div className="gestora-info">
-                                <div className="label">
-                                    <label>Nombre:</label>
-                                    <span className="info-name">{gestora.name}</span>
-                                </div>
-                                <div className="label">
-                                    <label>Valor:</label>
-                                    <span className="info-value">{gestora.value}</span>
-                                </div>
-                            </div>
-                            <div className="button-buy">
-                                <button>Comprar</button>
-                            </div>
-                        </div>
-                    ))
-                )}
+                {gestoras.map(gestora => (
+                    <div className="card-complete" key={gestora.id}>
+                        <h2>{gestora.name}</h2>
+                        <p>Telefono: {gestora.value}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );
 };
 
-export default Gestoras;
+export default Gestora;

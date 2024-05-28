@@ -22,7 +22,7 @@ export default function Formulario() {
             const response = await loginUser(data);
             const { user } = response.data;
             toast.success(`Bienvenido, ${user.name}`);
-            navigate("/About-us");
+            navigate("/Acciones");
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 toast.error("Contraseña inválida");

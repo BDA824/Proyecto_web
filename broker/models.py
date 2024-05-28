@@ -25,14 +25,15 @@ class Action(models.Model):
     
     def __str__(self):
         return self.name
-
-class Buy(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    
+class Broker(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.user.name
+        return self.name
+
 
 class Manager(models.Model):
     name = models.CharField(max_length=100)
@@ -42,13 +43,15 @@ class Manager(models.Model):
     def __str__(self):
         return self.name
 
-class Broker(models.Model):
-    name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=100)
+class Buy(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    broker = models.ForeignKey(Broker, on_delete=models.CASCADE, blank=True, null=True)
+    manager = models.ForeignKey(Manager, on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
-        return self.name
+        return self.user.name
 
 class Currency(models.Model):
     name = models.CharField(max_length=100)

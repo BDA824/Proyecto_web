@@ -38,9 +38,10 @@ export const getActionsByCountry = (countryId) => {
 };
 
 export const getGestorasByCountry = (countryId) => {
-    return BrokerAPI.get('/gestoras/${countryId}/');
+    console.log(countryId)
+    return BrokerAPI.get(`http://localhost:8000/api/managers/${countryId}`);
 };
 
 export const getBrokersByCountry = (countryId) => {
-    return BrokerAPI.get('/brokers/${countryId}/');
+    return BrokerAPI.get(`http://localhost:8000/api/brokers/${countryId}`);
 };
