@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import './Gestoras.css';
+import CardGestoras from '../Tarjet-gestoras/Card-gestoras'; // Importar el componente
 import { getGestorasByCountry } from '../../api/broker.api';
 import { toast } from 'react-hot-toast';
 
@@ -10,8 +11,7 @@ const Gestora = () => {
     const fetchGestorasByCountry = async (countryId) => {
         try {
             const response = await getGestorasByCountry(countryId);
-            const gestorasData = Array.isArray(response.data) ? response.data : [];
-            setGestoras(gestorasData);
+            setGestoras(response.data);
         } catch (error) {
             console.error('Error fetching gestoras:', error);
             toast.error('Error al obtener gestoras disponibles');
@@ -19,19 +19,19 @@ const Gestora = () => {
     };
 
     useEffect(() => {
+        const userCountryId = localStorage.getItem('userCountryId');
+        if (userCountryId) {
+            fetchGestorasByCountry(userCountryId);
+        }
+
         const handleStorageChange = () => {
-            const userCountryId = localStorage.getItem('userCountryId');
-            if (userCountryId) {
-                fetchGestorasByCountry(userCountryId);
+            const updatedCountryId = localStorage.getItem('userCountryId');
+            if (updatedCountryId) {
+                fetchGestorasByCountry(updatedCountryId);
             }
         };
 
         window.addEventListener('storage', handleStorageChange);
-
-        const initialCountryId = localStorage.getItem('userCountryId');
-        if (initialCountryId) {
-            fetchGestorasByCountry(initialCountryId);
-        }
 
         return () => {
             window.removeEventListener('storage', handleStorageChange);
@@ -45,8 +45,7 @@ const Gestora = () => {
             <div className="cards-container">
                 {gestoras.map(gestora => (
                     <div className="card-complete" key={gestora.id}>
-                        <h2>{gestora.name}</h2>
-                        <p>Telefono: {gestora.value}</p>
+                        <CardGestoras name={gestora.name} phone={gestora.phone} /> {/* Usar el componente */}
                     </div>
                 ))}
             </div>

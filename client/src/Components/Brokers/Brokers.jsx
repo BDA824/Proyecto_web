@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import './Brokers.css';
+import CardBrokers from '../Tarjet-brokers/Card-brokers'; // Importar el componente
 import { getBrokersByCountry } from '../../api/broker.api';
 import { toast } from 'react-hot-toast';
 
@@ -10,8 +11,7 @@ const Broker = () => {
     const fetchBrokersByCountry = async (countryId) => {
         try {
             const response = await getBrokersByCountry(countryId);
-            const brokersData = Array.isArray(response.data) ? response.data : [];
-            setBrokers(brokersData);
+            setBrokers(response.data);
         } catch (error) {
             console.error('Error fetching brokers:', error);
             toast.error('Error al obtener brokers disponibles');
@@ -19,19 +19,19 @@ const Broker = () => {
     };
 
     useEffect(() => {
+        const userCountryId = localStorage.getItem('userCountryId');
+        if (userCountryId) {
+            fetchBrokersByCountry(userCountryId);
+        }
+
         const handleStorageChange = () => {
-            const userCountryId = localStorage.getItem('userCountryId');
-            if (userCountryId) {
-                fetchBrokersByCountry(userCountryId);
+            const updatedCountryId = localStorage.getItem('userCountryId');
+            if (updatedCountryId) {
+                fetchBrokersByCountry(updatedCountryId);
             }
         };
 
         window.addEventListener('storage', handleStorageChange);
-
-        const initialCountryId = localStorage.getItem('userCountryId');
-        if (initialCountryId) {
-            fetchBrokersByCountry(initialCountryId);
-        }
 
         return () => {
             window.removeEventListener('storage', handleStorageChange);
@@ -45,8 +45,7 @@ const Broker = () => {
             <div className="cards-container">
                 {brokers.map(broker => (
                     <div className="card-complete" key={broker.id}>
-                        <h2>{broker.name}</h2>
-                        <p>Valor: {broker.value}</p>
+                        <CardBrokers name={broker.name} phone={broker.phone} /> {/* Usar el componente */}
                     </div>
                 ))}
             </div>

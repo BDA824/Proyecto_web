@@ -93,8 +93,8 @@ export default function EditarPerfil() {
                         <option value="Colombia">Colombia</option>
                         <option value="Argentina">Argentina</option>
                         <option value="Chile">Chile</option>
-                        <option value="Perú">Perú</option>
-                        <option value="México">México</option>
+                        <option value="Peru">Perú</option>
+                        <option value="Mexico">México</option>
                     </select>
                 </div>
                 <button onClick={handleUpdate}>Guardar Cambios</button>

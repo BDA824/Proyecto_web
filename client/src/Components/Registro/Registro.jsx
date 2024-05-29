@@ -67,8 +67,8 @@ export default function Registro() {
                     <option value="Colombia">Colombia</option>
                     <option value="Argentina">Argentina</option>
                     <option value="Chile">Chile</option>
-                    <option value="Perú">Perú</option>
-                    <option value="México">México</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Mexico">Mexico</option>
                 </select>
 
                 <input

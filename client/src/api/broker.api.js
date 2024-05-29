@@ -33,15 +33,22 @@ export const logoutUser = () => {
     return axios.post("http://localhost:8000/logout");
 };
 
-export const getActionsByCountry = (countryId) => {
-    return BrokerAPI.get(`http://localhost:8000/api/actions/${countryId}`);
+export const getActionsByCountry = (countryName) => {
+    const normalizedCountryName = normalizeCountryName(countryName);
+    return BrokerAPI.get(`http://localhost:8000/api/actions/${normalizedCountryName}`);
 };
 
-export const getGestorasByCountry = (countryId) => {
-    console.log(countryId)
-    return BrokerAPI.get(`http://localhost:8000/api/managers/${countryId}`);
+export const getGestorasByCountry = (countryName) => {
+    const normalizedCountryName = normalizeCountryName(countryName);
+    console.log("Fetching gestoras for country:", countryName);
+    return BrokerAPI.get(`http://localhost:8000/api/managers/${normalizedCountryName}`);
 };
 
-export const getBrokersByCountry = (countryId) => {
-    return BrokerAPI.get(`http://localhost:8000/api/brokers/${countryId}`);
+export const getBrokersByCountry = (countryName) => {
+    const normalizedCountryName = normalizeCountryName(countryName);
+    return BrokerAPI.get(`http://localhost:8000/api/brokers/${normalizedCountryName}`);
+};
+
+const normalizeCountryName = (countryName) => {
+    return countryName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };

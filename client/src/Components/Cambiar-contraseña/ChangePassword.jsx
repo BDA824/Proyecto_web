@@ -19,8 +19,13 @@ export default function ChangePassword() {
         }
 
         try {
-            //crear cambiar contraseña en broker
-            const response = await axios.put('http://localhost:8000/api/change_password/', {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                toast.error("No se encontró el ID de usuario.");
+                return;
+            }
+
+            const response = await axios.put(`http://localhost:8000/broker/api/v1/users/${userId}/change-password/`, {
                 old_password: oldPassword,
                 new_password: newPassword
             }, {
@@ -30,14 +35,14 @@ export default function ChangePassword() {
                 withCredentials: true
             });
 
-            if (response.data.status === 'success') {
+            if (response.status === 200) {
                 toast.success("Contraseña cambiada exitosamente.");
                 navigate('/Profile');
             } else {
                 toast.error(response.data.message || "Error al cambiar la contraseña.");
             }
         } catch (error) {
-            console.error(error);
+            console.error('Error:', error);
             toast.error("Error al cambiar la contraseña.");
         }
     };

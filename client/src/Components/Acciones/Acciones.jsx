@@ -11,8 +11,7 @@ const Traders = () => {
     const fetchActionsByCountry = async (countryId) => {
         try {
             const response = await getActionsByCountry(countryId);
-            const actionsData = Array.isArray(response.data) ? response.data : [];
-            setActions(actionsData);
+            setActions(response.data);
         } catch (error) {
             console.error('Error fetching actions:', error);
             toast.error('Error al obtener acciones disponibles');
@@ -20,19 +19,19 @@ const Traders = () => {
     };
 
     useEffect(() => {
+        const userCountryId = localStorage.getItem('userCountryId');
+        if (userCountryId) {
+            fetchActionsByCountry(userCountryId);
+        }
+
         const handleStorageChange = () => {
-            const userCountryId = localStorage.getItem('userCountryId');
-            if (userCountryId) {
-                fetchActionsByCountry(userCountryId);
+            const updatedCountryId = localStorage.getItem('userCountryId');
+            if (updatedCountryId) {
+                fetchActionsByCountry(updatedCountryId);
             }
         };
 
         window.addEventListener('storage', handleStorageChange);
-
-        const initialCountryId = localStorage.getItem('userCountryId');
-        if (initialCountryId) {
-            fetchActionsByCountry(initialCountryId);
-        }
 
         return () => {
             window.removeEventListener('storage', handleStorageChange);
