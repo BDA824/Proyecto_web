@@ -56,7 +56,6 @@ def LoginUser(request):
     return Response({'user': serializer.data}, status=status.HTTP_200_OK)   
 
 class ActionsByCountryView(APIView):
-    print("Entre a la validacion1")
     def get(self, request, country):
         print("Entre a la validacion", country)
         if country == "Colombia":
@@ -77,7 +76,6 @@ class ActionsByCountryView(APIView):
         return Response({"detail": "No actions found for this country"}, status=status.HTTP_404_NOT_FOUND)
 
 class ManagersByCountryView(APIView):
-    print("Entre a la validacion1")
     def get(self, request, country):
         print("Entre a la validacion", country)
         if country == "Colombia":
@@ -98,7 +96,6 @@ class ManagersByCountryView(APIView):
         return Response({"detail": "No managers found for this country"}, status=status.HTTP_404_NOT_FOUND)
     
 class BrokersByCountryView(APIView):
-    print("Entre a la validacion1")
     def get(self, request, country):
         print("Entre a la validacion", country)
         if country == "Colombia":
