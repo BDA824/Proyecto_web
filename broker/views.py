@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from .serializer import UserSerializer, ActionSerializer, BuySerializer, CountrySerializer, ManagerSerializer, BrokerSerializer, CurrencySerializer
 from .models import User, Action, Buy, Country, Manager, Broker, Currency
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
@@ -88,3 +90,64 @@ class BrokersByCountryView(APIView):
             serializer = BrokerSerializer(brokers, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({"detail": "No brokers found for this country"}, status=status.HTTP_404_NOT_FOUND)
+
+class UserView(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def join_gestora(self, request, pk=None):
+        user = self.get_object()
+        gestora_id = request.data.get('gestoraId')
+        try:
+            gestora = Manager.objects.get(id=gestora_id)
+        except Manager.DoesNotExist:
+            return Response({'detail': 'Gestora no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+        user.gestora = gestora
+        user.save()
+        return Response({'detail': 'Usuario unido a la gestora exitosamente'})
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def join_broker(self, request, pk=None):
+        user = self.get_object()
+        broker_id = request.data.get('brokerId')
+        try:
+            broker = Broker.objects.get(id=broker_id)
+        except Broker.DoesNotExist:
+            return Response({'detail': 'Broker no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+        user.broker = broker
+        user.save()
+        return Response({'detail': 'Usuario unido al broker exitosamente'})
+
+@api_view(['POST'])
+def join_gestora(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        gestora_id = request.data.get('gestoraId')
+        gestora = Manager.objects.get(id=gestora_id)
+        user.gestora = gestora
+        user.save()
+        return Response({'status': 'success', 'message': 'User joined gestora successfully'}, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({'status': 'error', 'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Manager.DoesNotExist:
+        return Response({'status': 'error', 'message': 'Gestora not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'status': 'error', 'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+def join_broker(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        broker_id = request.data.get('brokerId')
+        broker = Broker.objects.get(id=broker_id)
+        user.broker = broker
+        user.save()
+        return Response({'status': 'success', 'message': 'User joined broker successfully'}, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({'status': 'error', 'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Broker.DoesNotExist:
+        return Response({'status': 'error', 'message': 'Broker not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'status': 'error', 'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

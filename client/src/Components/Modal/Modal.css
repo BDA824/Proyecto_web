@@ -1,0 +1,56 @@
+/* Modal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #282828;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #00ffff;
+}
+
+.modal-content p {
+    margin: 20px 0;
+}
+
+.modal-content button {
+    background-color: #00ffff;
+    color: #282828;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #00cccc;
+}
+
+.modal-content button:last-child {
+    background-color: #ff4d4d;
+}
+
+.modal-content button:last-child:hover {
+    background-color: #cc0000;
+}

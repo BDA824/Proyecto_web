@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import './Gestoras.css';
-import CardGestoras from '../Tarjet-gestoras/Card-gestoras'; // Importar el componente
-import { getGestorasByCountry } from '../../api/broker.api';
+import CardGestoras from '../Tarjet-gestoras/Card-gestoras';
+import { getGestorasByCountry, joinGestora } from '../../api/broker.api';
 import { toast } from 'react-hot-toast';
 
 const Gestora = () => {
@@ -15,6 +15,17 @@ const Gestora = () => {
         } catch (error) {
             console.error('Error fetching gestoras:', error);
             toast.error('Error al obtener gestoras disponibles');
+        }
+    };
+
+    const handleJoinGestora = async (gestoraId) => {
+        try {
+            const userId = localStorage.getItem('userId');
+            await joinGestora(userId, gestoraId);
+            toast.success('Unido a la gestora exitosamente');
+        } catch (error) {
+            console.error('Error joining gestora:', error);
+            toast.error('Error al unirse a la gestora');
         }
     };
 
@@ -45,7 +56,10 @@ const Gestora = () => {
             <div className="cards-container">
                 {gestoras.map(gestora => (
                     <div className="card-complete" key={gestora.id}>
-                        <CardGestoras name={gestora.name} phone={gestora.phone} /> {/* Usar el componente */}
+                        <CardGestoras name={gestora.name} phone={gestora.phone} />
+                        <aside className="button-join">
+                            <button onClick={() => handleJoinGestora(gestora.id)}>Unirse</button>
+                        </aside>
                     </div>
                 ))}
             </div>

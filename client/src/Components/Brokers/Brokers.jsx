@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import './Brokers.css';
-import CardBrokers from '../Tarjet-brokers/Card-brokers'; // Importar el componente
-import { getBrokersByCountry } from '../../api/broker.api';
+import CardBrokers from '../Tarjet-brokers/Card-brokers';
+import { getBrokersByCountry, joinBroker } from '../../api/broker.api';
 import { toast } from 'react-hot-toast';
 
 const Broker = () => {
@@ -15,6 +15,17 @@ const Broker = () => {
         } catch (error) {
             console.error('Error fetching brokers:', error);
             toast.error('Error al obtener brokers disponibles');
+        }
+    };
+
+    const handleJoinBroker = async (brokerId) => {
+        try {
+            const userId = localStorage.getItem('userId');
+            await joinBroker(userId, brokerId);
+            toast.success('Unido al broker exitosamente');
+        } catch (error) {
+            console.error('Error joining broker:', error);
+            toast.error('Error al unirse al broker');
         }
     };
 
@@ -45,7 +56,10 @@ const Broker = () => {
             <div className="cards-container">
                 {brokers.map(broker => (
                     <div className="card-complete" key={broker.id}>
-                        <CardBrokers name={broker.name} phone={broker.phone} /> {/* Usar el componente */}
+                        <CardBrokers name={broker.name} phone={broker.phone} />
+                        <aside className="button-join">
+                            <button onClick={() => handleJoinBroker(broker.id)}>Unirse</button>
+                        </aside>
                     </div>
                 ))}
             </div>

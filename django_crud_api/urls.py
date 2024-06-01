@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from rest_framework.routers import DefaultRouter
 from broker import views
+
+router = DefaultRouter()
+router.register(r'users', views.UserView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +29,7 @@ urlpatterns = [
     path('api/actions/<str:country>/', views.ActionsByCountryView.as_view(), name='actions-by-country'),
     path('api/managers/<str:country>/', views.ManagersByCountryView.as_view(), name='managers-by-country'),
     path('api/brokers/<str:country>/', views.BrokersByCountryView.as_view(), name='brokers-by-country'),
+    path('api/', include(router.urls)),
+    path('users/<int:user_id>/join-gestora/', views.join_gestora, name='join-gestora'),
+    path('users/<int:user_id>/join-broker/', views.join_broker, name='join-broker'),
 ]
