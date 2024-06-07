@@ -14,10 +14,13 @@ export default function Perfil() {
         const obtenerPerfil = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const userId = localStorage.getItem('userId'); // Obtener el ID del usuario almacenado
+                const userId = localStorage.getItem('userId');
 
                 if (!token || !userId) {
-                    throw new Error('Token o ID de usuario no disponible');
+                    console.error('Token o ID de usuario no disponible');
+                    toast.error('Token o ID de usuario no disponible');
+                    navigate('/login');
+                    return;
                 }
 
                 const respuesta = await axios.get(`http://localhost:8000/broker/api/v1/users/${userId}/`, {

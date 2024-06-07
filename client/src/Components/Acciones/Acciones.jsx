@@ -3,13 +3,14 @@ import Main from '../Main/Main';
 import './Acciones.css';
 import CardAction from '../Target-action/Card-action';
 import Modal from '../Modal/Modal';
-import { getActionsByCountry, getGestorasByCountry, getBrokersByCountry } from '../../api/broker.api';
+import { getActionsByCountry, saveTransactionToJSON, getUserWallet, joinBroker } from '../../api/broker.api'; // Agregado joinBroker
 import { toast } from 'react-hot-toast';
 
-const Traders = () => {
+const Acciones = () => {
     const [actions, setActions] = useState([]);
     const [selectedAction, setSelectedAction] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchActionsByCountry = async (countryId) => {
         try {
@@ -18,6 +19,8 @@ const Traders = () => {
         } catch (error) {
             console.error('Error fetching actions:', error);
             toast.error('Error al obtener acciones disponibles');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -27,29 +30,49 @@ const Traders = () => {
     };
 
     const handleBuyAction = async (actionId) => {
-        // Lógica para comprar la acción
-        console.log('Comprando acción con id:', actionId);
-        toast.success('Acción comprada con éxito');
-        setShowModal(false);
+        const userId = localStorage.getItem('userId');
+        const userCountryId = localStorage.getItem('userCountryId');
+        
+        if (!userId || !userCountryId) {
+            toast.error('Información de usuario no disponible');
+            return;
+        }
+    
+        try {
+            await saveTransactionToJSON(userId, actionId, userCountryId);
+            toast.success('Acción comprada con éxito');
+            setShowModal(false);
+            fetchActionsByCountry(userCountryId);
+            updateUserWallet();
+        } catch (error) {
+            console.error('Error al comprar la acción:', error);
+            toast.error('Error al comprar la acción');
+        }
     };
 
-    const handleJoinGestoraBroker = async () => {
-        const userCountryId = localStorage.getItem('userCountryId');
-        if (userCountryId) {
-            try {
-                const gestorasResponse = await getGestorasByCountry(userCountryId);
-                const brokersResponse = await getBrokersByCountry(userCountryId);
-                const gestoras = gestorasResponse.data;
-                const brokers = brokersResponse.data;
-                console.log('Gestoras disponibles:', gestoras);
-                console.log('Brokers disponibles:', brokers);
-                toast.success('Unido a gestora/broker con éxito');
-            } catch (error) {
-                console.error('Error fetching gestoras/brokers:', error);
-                toast.error('Error al unirse a gestora/broker');
-            }
+    const updateUserWallet = async () => {
+        try {
+            const response = await getUserWallet(localStorage.getItem('userId'));
+            console.log('Billetera del usuario:', response.data);
+        } catch (error) {
+            console.error('Error al obtener la billetera del usuario:', error);
         }
-        setShowModal(false);
+    };
+
+    const handleJoinBroker = async () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            toast.error('Información de usuario no disponible');
+            return;
+        }
+
+        try {
+            await joinBroker(userId); // Llamada a joinBroker para simular unirse al broker
+            toast.success('Te has unido al broker exitosamente');
+        } catch (error) {
+            console.error('Error al unirse al broker:', error);
+            toast.error('Error al unirse al broker');
+        }
     };
 
     useEffect(() => {
@@ -73,30 +96,34 @@ const Traders = () => {
     }, []);
 
     return (
-        <div className="traders-container">
+        <div className="acciones-container">
             <Main />
             <h1 className="title-actions">Acciones disponibles para comprar</h1>
             <div className="cards-container">
-                {actions.map(action => (
-                    <div className="card-complete" key={action.id}>
-                        <CardAction name={action.name} value={action.value} />
-                        <aside className="button-buy">
-                            <button onClick={() => handleBuyClick(action)}>Comprar</button>
-                        </aside>
-                    </div>
-                ))}
+                {isLoading ? (
+                    <p>Cargando...</p>
+                ) : (
+                    actions.map(action => (
+                        <div className="card-complete" key={action.id}>
+                            <CardAction name={action.name} value={action.value} />
+                            <aside className="button-buy">
+                                <button onClick={() => handleBuyClick(action)}>Comprar</button>
+                            </aside>
+                        </div>
+                    ))
+                )}
             </div>
-            {selectedAction && (
-                <Modal 
-                    show={showModal} 
-                    onClose={() => setShowModal(false)} 
+            {showModal && (
+                <Modal
+                    show={showModal}
+                    onClose={() => setShowModal(false)}
                     action={selectedAction}
                     onBuy={handleBuyAction}
-                    onJoin={handleJoinGestoraBroker}
+                    onJoinBroker={handleJoinBroker} // Agregado handleJoinBroker
                 />
             )}
         </div>
     );
 };
 
-export default Traders;
+export default Acciones;

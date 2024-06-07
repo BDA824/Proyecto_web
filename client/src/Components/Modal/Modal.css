@@ -1,4 +1,5 @@
 /* Modal.css */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -44,13 +45,22 @@
 }
 
 .modal-content button:hover {
-    background-color: #00cccc;
+    background-color: #00ffff;
+}
+
+.modal-content button.join-button {
+    background-color: #00ffff;
+    color: #282828;
+}
+
+.modal-content button.join-button:hover {
+    background-color: #00ffff;
 }
 
 .modal-content button:last-child {
-    background-color: #ff4d4d;
+    background-color: #00ffff;
 }
 
 .modal-content button:last-child:hover {
-    background-color: #cc0000;
+    background-color: #3ad1d1;
 }

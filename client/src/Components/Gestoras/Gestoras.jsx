@@ -5,7 +5,7 @@ import CardGestoras from '../Tarjet-gestoras/Card-gestoras';
 import { getGestorasByCountry, joinGestora } from '../../api/broker.api';
 import { toast } from 'react-hot-toast';
 
-const Gestora = () => {
+const Gestoras = () => {
     const [gestoras, setGestoras] = useState([]);
 
     const fetchGestorasByCountry = async (countryId) => {
@@ -21,7 +21,8 @@ const Gestora = () => {
     const handleJoinGestora = async (gestoraId) => {
         try {
             const userId = localStorage.getItem('userId');
-            await joinGestora(userId, gestoraId);
+            await joinGestora(userId, gestoraId); 
+            localStorage.setItem('managerId', gestoraId); // Guardar la gestora en localStorage
             toast.success('Unido a la gestora exitosamente');
         } catch (error) {
             console.error('Error joining gestora:', error);
@@ -67,4 +68,4 @@ const Gestora = () => {
     );
 };
 
-export default Gestora;
+export default Gestoras;

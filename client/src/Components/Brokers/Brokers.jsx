@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import './Brokers.css';
 import CardBrokers from '../Tarjet-brokers/Card-brokers';
-import { getBrokersByCountry, joinBroker } from '../../api/broker.api';
+import { getBrokersByCountry, saveTransactionToJSON } from '../../api/broker.api';
 import { toast } from 'react-hot-toast';
 
-const Broker = () => {
+const Brokers = () => {
     const [brokers, setBrokers] = useState([]);
 
     const fetchBrokersByCountry = async (countryId) => {
@@ -21,7 +21,18 @@ const Broker = () => {
     const handleJoinBroker = async (brokerId) => {
         try {
             const userId = localStorage.getItem('userId');
-            await joinBroker(userId, brokerId);
+            const userCountryId = localStorage.getItem('userCountryId');
+
+            if (!userId || !userCountryId) {
+                toast.error('Información de usuario incompleta');
+                return;
+            }
+
+            await saveTransactionToJSON({
+                user: userId,
+                broker: brokerId,
+                country: userCountryId
+            });
             toast.success('Unido al broker exitosamente');
         } catch (error) {
             console.error('Error joining broker:', error);
@@ -67,4 +78,4 @@ const Broker = () => {
     );
 };
 
-export default Broker;
+export default Brokers;

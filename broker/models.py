@@ -11,7 +11,6 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
-
 class Country(models.Model):
     name = models.CharField(max_length=25)
     
@@ -20,7 +19,7 @@ class Country(models.Model):
 
 class Action(models.Model):
     name = models.CharField(max_length=48)
-    value = models.DecimalField(max_digits=200, decimal_places=2)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     
     def __str__(self):
@@ -33,7 +32,6 @@ class Broker(models.Model):
     
     def __str__(self):
         return self.name
-
 
 class Manager(models.Model):
     name = models.CharField(max_length=100)
@@ -51,7 +49,7 @@ class Buy(models.Model):
     manager = models.ForeignKey(Manager, on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
-        return self.user.name
+        return f"Compra de {self.action.name} por {self.user.name}"
 
 class Currency(models.Model):
     name = models.CharField(max_length=100)

@@ -1,5 +1,4 @@
 import './Card-action.css';
-import img from '../images/icon-id.png';
 
 export default function CardAction({ name, value }) {
     return (

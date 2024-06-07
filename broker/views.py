@@ -1,3 +1,4 @@
+import json
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -101,11 +102,13 @@ class UserView(viewsets.ModelViewSet):
         gestora_id = request.data.get('gestoraId')
         try:
             gestora = Manager.objects.get(id=gestora_id)
+            user.gestora = gestora
+            user.save()
+            return Response({'detail': 'Usuario unido a la gestora exitosamente'})
         except Manager.DoesNotExist:
             return Response({'detail': 'Gestora no encontrada'}, status=status.HTTP_404_NOT_FOUND)
-        user.gestora = gestora
-        user.save()
-        return Response({'detail': 'Usuario unido a la gestora exitosamente'})
+        except Exception as e:
+            return Response({'detail': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
     def join_broker(self, request, pk=None):
@@ -113,11 +116,13 @@ class UserView(viewsets.ModelViewSet):
         broker_id = request.data.get('brokerId')
         try:
             broker = Broker.objects.get(id=broker_id)
+            user.broker = broker
+            user.save()
+            return Response({'detail': 'Usuario unido al broker exitosamente'})
         except Broker.DoesNotExist:
             return Response({'detail': 'Broker no encontrado'}, status=status.HTTP_404_NOT_FOUND)
-        user.broker = broker
-        user.save()
-        return Response({'detail': 'Usuario unido al broker exitosamente'})
+        except Exception as e:
+            return Response({'detail': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])
 def join_gestora(request, user_id):
@@ -150,4 +155,28 @@ def join_broker(request, user_id):
         return Response({'status': 'error', 'message': 'Broker not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'status': 'error', 'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['POST'])
+def save_transaction_to_json(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        action_id = request.data.get('actionId')
+        action = Action.objects.get(id=action_id)
+        
+        transaction_data = {
+            'userId': user_id,
+            'actionId': action_id,
+            'actionName': action.name,
+            'actionValue': action.value,
+        }
 
+        with open('transaction.json', 'w') as file:
+            json.dump(transaction_data, file)
+
+        return Response({'status': 'success', 'message': 'Transacción guardada en JSON correctamente'}, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({'status': 'error', 'message': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+    except Action.DoesNotExist:
+        return Response({'status': 'error', 'message': 'Acción no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'status': 'error', 'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

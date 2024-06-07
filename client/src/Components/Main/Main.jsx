@@ -26,7 +26,15 @@ export default function Main() {
                     <Link className='redirect-view' to='/wallet'>Mi billetera</Link>
                     <Link className='redirect-view' to='/About-us'>Quienes somos</Link>
                 </span>
-                <Link className='logout-link' to='/login' onClick={handleLogout}>Cerrar sesión</Link>
+                <div className="portfolio-experiment">
+                    <a onClick={handleLogout}>
+                        <span className="text">Cerrar sesión</span>
+                        <span className="line -right"></span>
+                        <span className="line -top"></span>
+                        <span className="line -left"></span>
+                        <span className="line -bottom"></span>
+                    </a>
+                </div>
             </section>
         </div>
     );
